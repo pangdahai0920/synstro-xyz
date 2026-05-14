@@ -19,15 +19,15 @@ const products = [
     tag: 'Energy Storage',
     spec: 'IP54 / IP65  ·  SPCC Steel  ·  Custom kWh',
     desc: 'Battery Energy Storage System enclosures for C&I and utility-scale deployments. Outdoor-rated, fully sealed, available in standard and custom kWh configurations.',
-    img: '/images/factory/hero-factory.jpg',
+    keySpecs: ['IP54 / IP65 ingress protection', 'SPCC cold-rolled steel body', 'Powder-coated, RAL custom', 'OEM dimensions available'],
   },
   {
     slug: '/products/server-rack/',
     label: 'Server Racks',
     tag: 'IT Infrastructure',
-    spec: '6U – 47U  ·  19" EIA  ·  Floor & Wall Mount',
-    desc: '19-inch server rack enclosures from compact 6U wall-mount to full 47U floor-standing. Powder-coated SPCC steel, perforated ventilation, IP55 outdoor series available.',
-    img: '/images/factory/product-lineup.jpg',
+    spec: '6U – 42U  ·  19" EIA  ·  Floor & Wall Mount',
+    desc: '19-inch server rack enclosures from compact 6U wall-mount to full 42U floor-standing. Powder-coated SPCC steel, perforated ventilation, IP55 outdoor series available.',
+    keySpecs: ['Wall-mount 4U – 15U (WB/WN/WL/WNV)', 'Floor-standing 14U – 42U (F-66xx)', 'Outdoor IP55 series', '19" EIA 310-D compliant'],
   },
   {
     slug: '/products/pdu/',
@@ -35,7 +35,7 @@ const products = [
     tag: 'Power Distribution',
     spec: 'UK / US / EU / C13 / C19  ·  6–20A  ·  Switch + SPD',
     desc: 'Rack-mount power distribution units in UK, US, EU, Universal and IEC C13/C19 standards. Configurable by Ways/Ports, ampere rating, and add-on modules.',
-    img: '/images/factory/factory-interior.jpg',
+    keySpecs: ['UK / US / EU / FR / Universal', 'IEC C13 & C19 series', 'Switch, SPD, overload protection', 'Custom port count on request'],
   },
 ]
 
@@ -147,47 +147,51 @@ export default function Home() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }} className="product-lines-grid">
             {products.map((p, i) => (
               <Link key={p.slug} href={p.slug} style={{ textDecoration: 'none', display: 'block' }}>
                 <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: i % 2 === 0 ? '1fr 420px' : '420px 1fr',
-                  background: i % 2 === 0 ? '#252b3b' : '#1e2535',
+                  background: '#252b3b',
                   border: '1px solid #2e3648',
-                  minHeight: 260,
+                  padding: '36px 32px 32px',
+                  height: '100%',
+                  display: 'flex', flexDirection: 'column', gap: 16,
                   transition: 'border-color 0.15s',
                   cursor: 'pointer',
+                  borderTop: i === 0 ? '3px solid #e8a020' : '1px solid #2e3648',
                 }} className="product-row">
 
-                  {/* Text block — order swaps on even/odd */}
-                  <div style={{
-                    order: i % 2 === 0 ? 0 : 1,
-                    padding: '40px 44px',
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14,
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span style={{ padding: '3px 12px', background: 'rgba(232,160,32,0.12)', color: '#e8a020', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{p.tag}</span>
-                      <span style={{ fontSize: '0.75rem', color: '#4a5568', fontFamily: 'monospace' }}>{p.spec}</span>
-                    </div>
-                    <h3 style={{ fontSize: 'clamp(1.3rem, 2vw, 1.8rem)', fontWeight: 800, color: '#e8eaf0', lineHeight: 1.2 }}>{p.label}</h3>
-                    <p style={{ fontSize: '0.9rem', color: '#8a94a6', lineHeight: 1.75, maxWidth: 520 }}>{p.desc}</p>
-                    <span style={{ color: '#e8a020', fontSize: '0.88rem', fontWeight: 700, letterSpacing: '0.04em' }}>
-                      Explore {p.label} →
-                    </span>
+                  {/* Index number */}
+                  <div style={{ fontSize: '2.4rem', fontWeight: 900, color: 'rgba(232,160,32,0.15)', lineHeight: 1, fontFamily: 'monospace', marginBottom: -4 }}>
+                    0{i + 1}
                   </div>
 
-                  {/* Image block */}
-                  <div style={{
-                    order: i % 2 === 0 ? 1 : 0,
-                    backgroundImage: `url(${p.img})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    minHeight: 260,
-                    position: 'relative',
-                  }}>
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(10,13,20,0.5) 0%, transparent 60%)' }} />
+                  {/* Tag + spec */}
+                  <div>
+                    <span style={{ display: 'inline-block', padding: '3px 12px', background: 'rgba(232,160,32,0.12)', color: '#e8a020', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{p.tag}</span>
+                    <div style={{ fontSize: '0.75rem', color: '#4a5568', fontFamily: 'monospace', lineHeight: 1.6 }}>{p.spec}</div>
                   </div>
+
+                  {/* Title */}
+                  <h3 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#e8eaf0', lineHeight: 1.2, margin: 0 }}>{p.label}</h3>
+
+                  {/* Description */}
+                  <p style={{ fontSize: '0.88rem', color: '#8a94a6', lineHeight: 1.8, margin: 0, flexGrow: 1 }}>{p.desc}</p>
+
+                  {/* Key specs list */}
+                  <div style={{ borderTop: '1px solid #2e3648', paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {p.keySpecs.map(ks => (
+                      <div key={ks} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ width: 4, height: 4, background: '#e8a020', display: 'inline-block', flexShrink: 0, transform: 'rotate(45deg)' }} />
+                        <span style={{ fontSize: '0.8rem', color: '#6a7485', fontFamily: 'monospace' }}>{ks}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <span style={{ color: '#e8a020', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.04em', marginTop: 4 }}>
+                    Explore {p.label} →
+                  </span>
                 </div>
               </Link>
             ))}
