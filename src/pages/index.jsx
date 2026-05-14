@@ -1,31 +1,31 @@
-﻿import Layout from '../components/Layout'
+import Layout from '../components/Layout'
 import Link from 'next/link'
 
 const capabilities = [
-  { icon: '鈿?, label: 'SPCC Cold-Rolled Steel' },
-  { icon: '鉁?, label: 'CNC Precision Bending & Welding' },
-  { icon: '馃洝', label: 'IP54 / IP65 Rated' },
-  { icon: '馃帹', label: 'In-House Powder Coating' },
-  { icon: '馃敡', label: 'OEM & ODM Ready' },
+  { label: 'SPCC Cold-Rolled Steel' },
+  { label: 'CNC Precision Bending & Welding' },
+  { label: 'IP54 / IP65 Rated' },
+  { label: 'In-House Powder Coating' },
+  { label: 'OEM & ODM Ready' },
 ]
 
 const products = [
   {
     slug: '/products/bess-cabinet/',
     label: 'BESS Cabinets',
-    desc: 'Battery Energy Storage System enclosures for C&I and utility-scale projects. Outdoor IP65 rated, SPCC steel construction, custom kWh configurations.',
+    desc: 'Battery Energy Storage System enclosures for C&I and utility-scale projects. Outdoor IP54 rated, SPCC steel construction, custom kWh configurations.',
     tag: 'Energy Storage',
   },
   {
     slug: '/products/server-rack/',
     label: 'Server Racks',
-    desc: '19-inch server rack enclosures from 12U to 42U. Floor-standing and wall-mount. IP54 rated, powder-coated, data center and telecom ready.',
+    desc: '19-inch server rack enclosures from 6U to 47U. Floor-standing and wall-mount. IP55 rated, powder-coated, data center and telecom ready.',
     tag: 'IT Infrastructure',
   },
   {
     slug: '/products/pdu/',
     label: 'PDU Systems',
-    desc: '8-Way to 32-Port rack power distribution units. Basic, metered and switched configurations. Custom amperage and connector layouts for OEM projects.',
+    desc: '8-Way to 24-Way rack power distribution units. Basic, metered and switched configurations. Custom amperage and connector layouts for OEM projects.',
     tag: 'Power Distribution',
   },
 ]
@@ -49,7 +49,7 @@ const industries = [
 export default function Home() {
   return (
     <Layout
-      title="Synstro 鈥?Industrial Enclosures & Energy Storage Manufacturer"
+      title="Synstro - Industrial Enclosures & Energy Storage Manufacturer"
       description="BESS cabinets, server racks and PDU systems. SPCC steel, IP54/IP65, ISO 9001 certified. OEM/ODM for system integrators and EPC contractors."
     >
       {/* 1. HERO */}
@@ -66,14 +66,14 @@ export default function Home() {
         <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: '#e8a020' }} />
         <div className="container" style={{ position: 'relative', zIndex: 1, padding: '80px 24px' }}>
           <div style={{ maxWidth: 780 }}>
-            <div className="section-label">Chengdu, China 路 Est. 2019</div>
+            <div className="section-label">Chengdu, China - Est. 2019</div>
             <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: 24, color: '#e8eaf0' }}>
               Industrial Enclosures &<br />
               <span style={{ color: '#e8a020' }}>Energy Storage</span>,<br />
               Engineered for Demanding Environments.
             </h1>
             <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', color: '#8a94a6', marginBottom: 40, lineHeight: 1.75, maxWidth: 620 }}>
-              BESS Cabinets 路 Server Racks 路 PDU Systems 鈥?factory-direct from an ISO 9001 certified manufacturer. Serving system integrators and EPC contractors across the Middle East and Africa.
+              BESS Cabinets / Server Racks / PDU Systems -- factory-direct from an ISO 9001 certified manufacturer. Serving system integrators and EPC contractors across the Middle East and Africa.
             </p>
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
               <Link href="/contact/" className="btn-primary">Request a Quote</Link>
@@ -89,7 +89,7 @@ export default function Home() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0, justifyContent: 'space-around' }}>
             {capabilities.map((c) => (
               <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px' }}>
-                <span style={{ fontSize: '1.3rem' }}>{c.icon}</span>
+                <span style={{ width: 6, height: 6, background: '#e8a020', display: 'inline-block', flexShrink: 0 }} />
                 <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#c8d0de', letterSpacing: '0.02em' }}>{c.label}</span>
               </div>
             ))}
@@ -121,14 +121,15 @@ export default function Home() {
                 <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#e8eaf0' }}>{p.label}</h3>
                 <p style={{ fontSize: '0.92rem', color: '#8a94a6', lineHeight: 1.75, flex: 1 }}>{p.desc}</p>
                 <Link href={p.slug} style={{ color: '#e8a020', fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.04em' }}>
-                  Explore Products 鈫?                </Link>
+                  Explore Products &rarr;
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. WHY SYNSTRO */}
+      {/* 4. STATS */}
       <section style={{ padding: '100px 0', background: '#1e2535' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 2 }}>
@@ -145,7 +146,7 @@ export default function Home() {
           </div>
           <div style={{ marginTop: 48, padding: '40px', background: '#252b3b', borderLeft: '4px solid #2e3648' }}>
             <p style={{ fontSize: '1.05rem', color: '#c8d0de', lineHeight: 1.8, maxWidth: 800 }}>
-              Founded in Chengdu, Sichuan, Synstro operates an integrated manufacturing facility covering steel fabrication, CNC precision processing, in-house powder coating, and final assembly 鈥?enabling full quality control from raw material to finished enclosure.
+              Founded in Chengdu, Sichuan, Synstro operates an integrated manufacturing facility covering steel fabrication, CNC precision processing, in-house powder coating, and final assembly -- enabling full quality control from raw material to finished enclosure.
             </p>
           </div>
         </div>
@@ -155,7 +156,7 @@ export default function Home() {
       <section style={{ background: '#111520', padding: '36px 0', borderTop: '1px solid #2e3648' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#4a5568', marginBottom: 20 }}>
-            Certifications & Standards
+            Certifications &amp; Standards
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap', alignItems: 'center' }}>
             {['ISO 9001', 'ISO 45001', 'OEM / ODM'].map((cert) => (
@@ -193,11 +194,11 @@ export default function Home() {
               Ready to Source? Submit Your RFQ.
             </h2>
             <p style={{ color: '#8a94a6', fontSize: '1rem', lineHeight: 1.7 }}>
-              Share your project specifications 鈥?capacity, quantity, target delivery date. Our engineering team responds within 48 hours with a formal quotation.
+              Share your project specifications -- capacity, quantity, target delivery date. Our engineering team responds within 48 hours with a formal quotation.
             </p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 280 }}>
-            <Link href="/contact/" className="btn-primary" style={{ textAlign: 'center' }}>Submit RFQ 鈫?/Link>
+            <Link href="/contact/" className="btn-primary" style={{ textAlign: 'center' }}>Submit RFQ &rarr;</Link>
             <a href="mailto:ztsc1030@gmail.com" style={{ textAlign: 'center', fontSize: '0.88rem', color: '#8a94a6', padding: '10px 0' }}>
               or email ztsc1030@gmail.com
             </a>
@@ -208,4 +209,3 @@ export default function Home() {
     </Layout>
   )
 }
-
