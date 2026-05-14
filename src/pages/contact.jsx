@@ -1,4 +1,4 @@
-import Layout from '../components/Layout'
+﻿import Layout from '../components/Layout'
 import { useState } from 'react'
 
 export default function Contact() {
@@ -34,7 +34,7 @@ export default function Contact() {
 
   return (
     <Layout
-      title="Contact Synstro – Request a Quote for Custom Enclosures"
+      title="Contact Synstro 鈥?Request a Quote for Custom Enclosures"
       description="Submit your RFQ for BESS cabinets, server racks or PDU systems. OEM/ODM available. Fast pre-sales response from Synstro engineering team."
     >
       <section style={{ padding: '80px 0', background: '#1a1f2e', minHeight: '90vh' }}>
@@ -47,7 +47,7 @@ export default function Contact() {
 
           {submitted ? (
             <div style={{ background: '#252b3b', border: '1px solid #e8a020', padding: 48, textAlign: 'center' }}>
-              <div style={{ fontSize: '2rem', marginBottom: 16 }}>✓</div>
+              <div style={{ fontSize: '2rem', marginBottom: 16 }}>鉁?/div>
               <h2 style={{ color: '#e8a020', marginBottom: 12 }}>RFQ Received</h2>
               <p style={{ color: '#8a94a6' }}>Our engineering team will contact you within 48 hours at the email address provided.</p>
             </div>
@@ -125,3 +125,4 @@ export default function Contact() {
     </Layout>
   )
 }
+
