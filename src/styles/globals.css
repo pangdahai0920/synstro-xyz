@@ -124,3 +124,22 @@ a {
 .spec-row:hover td {
   background: #2e3648 !important;
 }
+
+/* Product card (grid listing page) */
+.product-card {
+  background: #252b3b;
+  border: 1px solid #2e3648;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.product-card:hover {
+  border-color: #e8a020;
+  transform: translateY(-2px);
+}
+
+/* Product detail two-col layout — stack on mobile */
+@media (max-width: 700px) {
+  .detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
