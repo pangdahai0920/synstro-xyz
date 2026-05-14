@@ -1,11 +1,10 @@
+import { useState } from 'react'
 import Layout from '../../../components/Layout'
 import Link from 'next/link'
 import { allServerRackProducts, getProductBySlug, serverRackGroups } from '../../../data/products'
 
 export async function getStaticPaths() {
-  const paths = allServerRackProducts.map(p => ({
-    params: { slug: p.slug },
-  }))
+  const paths = allServerRackProducts.map(p => ({ params: { slug: p.slug } }))
   return { paths, fallback: false }
 }
 
@@ -17,29 +16,123 @@ export async function getStaticProps({ params }) {
   return { props: { product, siblings } }
 }
 
+// ── Standard spec rows (non-WB products) ──────────────────────────────────
+function SpecTable({ product }) {
+  const rows = [
+    { key: 'Model',                  value: product.model },
+    { key: 'Rack Size',              value: product.uSize },
+    { key: 'Dimensions (W × D × H)', value: product.dims },
+    { key: 'Net Weight',             value: product.weight },
+    { key: 'Volume',                 value: product.volume },
+    { key: 'Material',               value: product.material },
+    { key: 'Door',                   value: product.door },
+    { key: 'Color',                  value: product.color },
+    { key: 'Accessories',            value: product.accessories },
+    { key: 'Notes',                  value: product.notes },
+  ].filter(r => r.value && r.value !== 'N/A' && !r.value.startsWith('Contact'))
+
+  return (
+    <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 40 }}>
+      <tbody>
+        {rows.map((row, i) => (
+          <tr key={row.key} style={{ borderBottom: '1px solid #2e3648', background: i % 2 === 0 ? 'transparent' : 'rgba(37,43,59,0.5)' }}>
+            <td style={{ padding: '10px 12px', fontSize: '0.82rem', color: '#8a94a6', fontWeight: 600, whiteSpace: 'nowrap', width: '42%' }}>{row.key}</td>
+            <td style={{ padding: '10px 12px', fontSize: '0.88rem', color: '#e8eaf0' }}>{row.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+// ── WB variant selector + spec table ──────────────────────────────────────
+function WBVariantPanel({ product }) {
+  const [activeIdx, setActiveIdx] = useState(0)
+  const v = product.variants[activeIdx]
+
+  const commonRows = [
+    { key: 'Rack Size',  value: product.uSize },
+    { key: 'Material',   value: product.material },
+    { key: 'Door',       value: product.door },
+    { key: 'Color',      value: product.color },
+  ]
+  const variantRows = [
+    { key: 'Model No.',             value: v.model },
+    { key: 'Dimensions (W × D × H)', value: v.dims },
+    { key: 'Net Weight',            value: v.weight !== 'N/A' ? v.weight : '— (contact for data)' },
+    { key: 'Volume',                value: v.volume },
+    { key: 'Accessories',           value: v.accessories },
+  ]
+  const allRows = [...variantRows, ...commonRows]
+
+  return (
+    <div>
+      {/* Depth selector */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ fontSize: '0.78rem', color: '#8a94a6', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
+          Select Depth
+        </div>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {product.variants.map((variant, idx) => (
+            <button
+              key={variant.depth}
+              onClick={() => setActiveIdx(idx)}
+              style={{
+                padding: '8px 20px',
+                border: idx === activeIdx ? '2px solid #e8a020' : '1px solid #2e3648',
+                background: idx === activeIdx ? 'rgba(232,160,32,0.1)' : '#1a1f2e',
+                color: idx === activeIdx ? '#e8a020' : '#8a94a6',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                cursor: 'pointer',
+                letterSpacing: '0.05em',
+                transition: 'all 0.15s',
+              }}
+            >
+              {variant.depth}
+            </button>
+          ))}
+        </div>
+        <div style={{ fontSize: '0.78rem', color: '#4a5568', marginTop: 8 }}>
+          Selected: <span style={{ color: '#e8eaf0', fontWeight: 600 }}>{v.model}</span>
+        </div>
+      </div>
+
+      {/* Spec table for selected variant */}
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 40 }}>
+        <tbody>
+          {allRows.map((row, i) => (
+            <tr key={row.key} style={{ borderBottom: '1px solid #2e3648', background: i % 2 === 0 ? 'transparent' : 'rgba(37,43,59,0.5)' }}>
+              <td style={{ padding: '10px 12px', fontSize: '0.82rem', color: '#8a94a6', fontWeight: 600, whiteSpace: 'nowrap', width: '42%' }}>{row.key}</td>
+              <td style={{ padding: '10px 12px', fontSize: '0.88rem', color: '#e8eaf0' }}>{row.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+// ── Page component ─────────────────────────────────────────────────────────
 export default function ProductDetail({ product, siblings }) {
-  const specRows = [
-    { key: 'Model', value: product.model },
-    { key: 'Rack Size', value: product.uSize },
-    { key: 'Dimensions (W x D x H)', value: product.dims },
-    { key: 'Net Weight', value: product.weight },
-    { key: 'Volume', value: product.volume },
-    { key: 'Material', value: product.material },
-    { key: 'Door', value: product.door },
-    { key: 'Color', value: product.color },
-    { key: 'Accessories', value: product.accessories },
-    { key: 'Notes', value: product.notes },
-  ].filter(r => r.value && r.value !== 'TBC' && r.value !== 'TBC — awaiting confirmed data')
+  const isWB = Boolean(product.variants)
+
+  const mailSubject = encodeURIComponent('Inquiry: ' + (isWB ? product.model : product.model))
+  const mailBody = encodeURIComponent(
+    'Hi Synstro,\n\nI am interested in the ' + product.label + '.\n\n' +
+    (isWB ? 'Preferred depth (D450/D600/D800/D1000):\n' : '') +
+    'Required quantity:\nTarget delivery:\nProject details:\n\nPlease send your best quote.'
+  )
 
   return (
     <Layout
-      title={product.label + ' – Wall-Mount Cabinet | Synstro'}
+      title={product.label + ' | Synstro Industrial Enclosures'}
       description={
-        product.model + ' ' + product.uSize + ' server rack enclosure. ' +
-        product.dims + '. ' + product.material + '. Contact Synstro for quote.'
+        product.model + ' ' + product.uSize + ' wall-mount cabinet. ' +
+        product.material + '. Contact Synstro for OEM quote.'
       }
     >
-      {/* breadcrumb */}
+      {/* Breadcrumb */}
       <div style={{ background: '#111520', padding: '12px 0', borderBottom: '1px solid #2e3648' }}>
         <div className="container" style={{ fontSize: '0.82rem', color: '#4a5568' }}>
           <Link href="/" style={{ color: '#4a5568' }}>Home</Link>
@@ -55,14 +148,8 @@ export default function ProductDetail({ product, siblings }) {
       {/* Main detail block */}
       <section style={{ padding: '60px 0', background: '#1a1f2e' }}>
         <div className="container">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(280px, 460px) 1fr',
-            gap: 48,
-            alignItems: 'start',
-          }}
-            className="detail-grid"
-          >
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 460px) 1fr', gap: 48, alignItems: 'start' }} className="detail-grid">
+
             {/* LEFT — product image */}
             <div style={{
               background: '#252b3b',
@@ -73,11 +160,7 @@ export default function ProductDetail({ product, siblings }) {
               padding: 32,
               aspectRatio: '1',
             }}>
-              <img
-                src={product.image}
-                alt={product.model}
-                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-              />
+              <img src={product.image} alt={product.model} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             </div>
 
             {/* RIGHT — info + specs */}
@@ -90,26 +173,13 @@ export default function ProductDetail({ product, siblings }) {
               </h1>
               <div style={{ color: '#8a94a6', fontSize: '0.95rem', marginBottom: 32 }}>{product.label}</div>
 
-              {/* Spec table */}
-              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 40 }}>
-                <tbody>
-                  {specRows.map((row, i) => (
-                    <tr key={row.key} style={{ borderBottom: '1px solid #2e3648', background: i % 2 === 0 ? 'transparent' : 'rgba(37,43,59,0.5)' }}>
-                      <td style={{ padding: '10px 12px', fontSize: '0.82rem', color: '#8a94a6', fontWeight: 600, whiteSpace: 'nowrap', width: '40%' }}>
-                        {row.key}
-                      </td>
-                      <td style={{ padding: '10px 12px', fontSize: '0.88rem', color: '#e8eaf0' }}>
-                        {row.value}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {/* Spec block — WB gets variant selector, others get flat table */}
+              {isWB ? <WBVariantPanel product={product} /> : <SpecTable product={product} />}
 
-              {/* Email CTA */}
+              {/* CTA */}
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <a
-                  href={'mailto:ztsc1030@gmail.com?subject=Inquiry: ' + product.model + '&body=Hi Synstro,%0A%0AI am interested in the ' + product.model + '.%0A%0ARequired quantity:%0ATarget delivery:%0AProject details:%0A%0APlease send your best quote.'}
+                  href={`mailto:ztsc1030@gmail.com?subject=${mailSubject}&body=${mailBody}`}
                   style={{
                     display: 'inline-block',
                     padding: '14px 32px',
@@ -147,7 +217,7 @@ export default function ProductDetail({ product, siblings }) {
         </div>
       </section>
 
-      {/* Siblings / Related models */}
+      {/* Siblings */}
       {siblings.length > 1 && (
         <section style={{ padding: '56px 0', background: '#111520', borderTop: '1px solid #2e3648' }}>
           <div className="container">
@@ -157,16 +227,7 @@ export default function ProductDetail({ product, siblings }) {
                 <Link
                   key={s.slug}
                   href={'/products/server-rack/' + s.slug + '/'}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12,
-                    padding: '14px 16px',
-                    background: '#1a1f2e',
-                    border: '1px solid #2e3648',
-                    textDecoration: 'none',
-                    minWidth: 140,
-                  }}
+                  style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: '#1a1f2e', border: '1px solid #2e3648', textDecoration: 'none', minWidth: 140 }}
                 >
                   <img src={s.image} alt={s.model} style={{ width: 40, height: 40, objectFit: 'contain' }} />
                   <span>
@@ -180,7 +241,7 @@ export default function ProductDetail({ product, siblings }) {
         </section>
       )}
 
-      {/* Back to series */}
+      {/* Back link */}
       <div style={{ background: '#0d1117', padding: '24px 0', borderTop: '1px solid #2e3648' }}>
         <div className="container">
           <Link href="/products/server-rack/" style={{ color: '#8a94a6', fontSize: '0.88rem', textDecoration: 'none' }}>
