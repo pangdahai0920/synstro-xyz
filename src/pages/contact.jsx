@@ -23,6 +23,12 @@ export default function Contact() {
     }))
   }
 
+  // Format date from yyyy-mm-dd to yyyy/mm/dd
+  const formatDate = (val) => {
+    if (!val) return 'Not specified'
+    return val.replace(/-/g, '/')
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -32,6 +38,7 @@ export default function Contact() {
       access_key: WEB3FORMS_KEY,
       subject: `[Synstro RFQ] ${form.company} — ${form.products.join(', ') || 'General Inquiry'}`,
       from_name: form.name,
+      replyto: form.email,
       Company: form.company,
       Country: form.country,
       'Contact Name': form.name,
@@ -39,7 +46,7 @@ export default function Contact() {
       'WhatsApp / Phone': form.phone || 'N/A',
       'Product Interest': form.products.join(', ') || 'Not specified',
       'Quantity Required': form.quantity,
-      'Target Delivery Date': form.delivery || 'Not specified',
+      'Target Delivery Date': formatDate(form.delivery),
       'Detailed Requirements': form.requirements || 'N/A',
       botcheck: '',
     }
@@ -152,8 +159,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <label style={labelStyle}>Target Delivery Date</label>
-                  <input type="date" style={inputStyle} value={form.delivery}
-                    onChange={e => setForm({ ...form, delivery: e.target.value })} />
+                  <input type="text" style={inputStyle} placeholder="e.g. 2025/06/30"
+                    value={form.delivery} onChange={e => setForm({ ...form, delivery: e.target.value })} />
                 </div>
               </div>
 
