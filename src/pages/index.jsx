@@ -1,11 +1,14 @@
 import Layout from '../components/Layout'
 import Link from 'next/link'
 
+// ── Data ────────────────────────────────────────────────────────────────────
+
 const capabilities = [
   { label: 'SPCC Cold-Rolled Steel' },
-  { label: 'CNC Precision Bending & Welding' },
-  { label: 'IP54 / IP65 Rated' },
+  { label: 'CNC Precision Bending' },
   { label: 'In-House Powder Coating' },
+  { label: 'IP54 / IP65 Rated' },
+  { label: 'ISO 9001 Certified' },
   { label: 'OEM & ODM Ready' },
 ]
 
@@ -13,195 +16,320 @@ const products = [
   {
     slug: '/products/bess-cabinet/',
     label: 'BESS Cabinets',
-    desc: 'Battery Energy Storage System enclosures for C&I and utility-scale projects. Outdoor IP54 rated, SPCC steel construction, custom kWh configurations.',
     tag: 'Energy Storage',
+    spec: 'IP54 / IP65  ·  SPCC Steel  ·  Custom kWh',
+    desc: 'Battery Energy Storage System enclosures for C&I and utility-scale deployments. Outdoor-rated, fully sealed, available in standard and custom kWh configurations.',
+    img: '/images/factory/hero-factory.jpg',
   },
   {
     slug: '/products/server-rack/',
     label: 'Server Racks',
-    desc: '19-inch server rack enclosures from 6U to 47U. Floor-standing and wall-mount. IP55 rated, powder-coated, data center and telecom ready.',
     tag: 'IT Infrastructure',
+    spec: '6U – 47U  ·  19" EIA  ·  Floor & Wall Mount',
+    desc: '19-inch server rack enclosures from compact 6U wall-mount to full 47U floor-standing. Powder-coated SPCC steel, perforated ventilation, IP55 outdoor series available.',
+    img: '/images/factory/product-lineup.jpg',
   },
   {
     slug: '/products/pdu/',
     label: 'PDU Systems',
-    desc: '8-Way to 24-Way rack power distribution units. Basic, metered and switched configurations. Custom amperage and connector layouts for OEM projects.',
     tag: 'Power Distribution',
+    spec: 'UK / US / EU / C13 / C19  ·  6–20A  ·  Switch + SPD',
+    desc: 'Rack-mount power distribution units in UK, US, EU, Universal and IEC C13/C19 standards. Configurable by Ways/Ports, ampere rating, and add-on modules.',
+    img: '/images/factory/factory-interior.jpg',
   },
 ]
 
 const stats = [
-  { value: '2019', label: 'Founded' },
-  { value: 'ISO 9001', label: 'Quality Certified' },
-  { value: 'ISO 45001', label: 'Safety Certified' },
-  { value: 'OEM/ODM', label: 'Full Customisation' },
+  { value: '2019',   label: 'Est. in Chengdu' },
+  { value: '5,000+', label: 'Units / Year' },
+  { value: '20+',    label: 'Countries Served' },
+  { value: '30+',    label: 'Active OEM Clients' },
+]
+
+const processSteps = [
+  { n: '01', title: 'SPCC Steel Intake',      desc: 'Cold-rolled coil sourced to JIS G3141 / GB/T 11253. Thickness verified per spec before production.' },
+  { n: '02', title: 'CNC Laser Cutting',      desc: 'Precision laser and CNC punch press. Dimensional tolerance ±0.5mm across all panel formats.' },
+  { n: '03', title: 'Bending & Welding',       desc: 'CNC press brake forming. TIG/MIG welding with weld seam inspection on structural joints.' },
+  { n: '04', title: 'Powder Coating',          desc: 'In-house electrostatic powder coat line. RAL 9005 jet black standard; custom colours on request.' },
+  { n: '05', title: 'Assembly & QC',           desc: 'Hardware fit, door alignment, IP gasket installation. Final dimensional and torque inspection.' },
+  { n: '06', title: 'Export Packaging',        desc: 'Foam-padded carton or wooden crate. FCL/LCL coordination available ex-works Chengdu.' },
 ]
 
 const industries = [
   'Data Centers',
-  'Solar Storage Projects',
+  'Solar & BESS Projects',
   'Telecom Infrastructure',
   'Government & Enterprise',
   'EPC Contractors',
   'System Integrators',
 ]
 
+// ── Component ────────────────────────────────────────────────────────────────
+
 export default function Home() {
   return (
     <Layout
-      title="Synstro - Industrial Enclosures & Energy Storage Manufacturer"
-      description="BESS cabinets, server racks and PDU systems. SPCC steel, IP54/IP65, ISO 9001 certified. OEM/ODM for system integrators and EPC contractors."
+      title="Synstro — Industrial Enclosures & Energy Storage Manufacturer | Chengdu"
+      description="BESS cabinets, server racks and PDU systems factory-direct from Chengdu. SPCC steel, IP54/IP65, ISO 9001. OEM/ODM for system integrators and EPC contractors worldwide."
     >
-      {/* 1. HERO */}
-      <section style={{
-        minHeight: '88vh',
-        background: 'linear-gradient(135deg, #0d1117 0%, #1a1f2e 40%, #1e2535 100%)',
-        display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden'
-      }}>
+
+      {/* ── 1. HERO ── */}
+      <section style={{ position: 'relative', minHeight: '92vh', display: 'flex', alignItems: 'center', overflow: 'hidden', background: '#0d1117' }}>
+
+        {/* Background factory image */}
         <div style={{
-          position: 'absolute', inset: 0, opacity: 0.04,
-          backgroundImage: 'linear-gradient(#e8a020 1px, transparent 1px), linear-gradient(90deg, #e8a020 1px, transparent 1px)',
-          backgroundSize: '60px 60px'
+          position: 'absolute', inset: 0,
+          backgroundImage: 'url(/images/factory/hero-factory.jpg)',
+          backgroundSize: 'cover', backgroundPosition: 'center 30%',
+          opacity: 0.28,
         }} />
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: '#e8a020' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1, padding: '80px 24px' }}>
-          <div style={{ maxWidth: 780 }}>
-            <div className="section-label">Chengdu, China - Est. 2019</div>
-            <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: 24, color: '#e8eaf0' }}>
-              Industrial Enclosures &<br />
-              <span style={{ color: '#e8a020' }}>Energy Storage</span>,<br />
-              Engineered for Demanding Environments.
+
+        {/* Dark gradient overlay — left heavy so text is legible */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(105deg, rgba(10,13,20,0.98) 0%, rgba(10,13,20,0.85) 45%, rgba(10,13,20,0.35) 100%)',
+        }} />
+
+        {/* Amber left accent bar */}
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 4, background: '#e8a020', zIndex: 2 }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 2, padding: '100px 24px 80px' }}>
+          <div style={{ maxWidth: 700 }}>
+            <div className="section-label" style={{ marginBottom: 20 }}>Chengdu, China — Est. 2019</div>
+
+            <h1 style={{ fontSize: 'clamp(2.4rem, 5.5vw, 4rem)', fontWeight: 900, lineHeight: 1.08, marginBottom: 28, color: '#e8eaf0', letterSpacing: '-0.03em' }}>
+              Industrial Enclosures<br />
+              &amp; <span style={{ color: '#e8a020' }}>Energy Storage</span>,<br />
+              Engineered for<br />Demanding Environments.
             </h1>
-            <p style={{ fontSize: 'clamp(1rem, 1.8vw, 1.2rem)', color: '#8a94a6', marginBottom: 40, lineHeight: 1.75, maxWidth: 620 }}>
-              BESS Cabinets / Server Racks / PDU Systems -- factory-direct from an ISO 9001 certified manufacturer. Serving system integrators and EPC contractors across the Middle East and Africa.
+
+            <p style={{ fontSize: 'clamp(0.95rem, 1.6vw, 1.1rem)', color: '#8a94a6', marginBottom: 16, lineHeight: 1.8, maxWidth: 560 }}>
+              Factory-direct BESS Cabinets, Server Racks, and PDU Systems from an ISO&nbsp;9001 certified SPCC steel manufacturer. Serving system integrators and EPC contractors across the Middle East, Africa and Southeast Asia.
             </p>
+
+            {/* Spec pills */}
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 40 }}>
+              {['IP54 / IP65', 'ISO 9001', 'OEM / ODM', 'Ex-works Chengdu'].map(t => (
+                <span key={t} style={{ padding: '4px 12px', border: '1px solid #2e3648', fontSize: '0.78rem', color: '#4a5568', fontWeight: 600 }}>{t}</span>
+              ))}
+            </div>
+
             <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-              <Link href="/contact/" className="btn-primary">Request a Quote</Link>
-              <Link href="/products/" className="btn-secondary">View Products</Link>
+              <Link href="/contact/" className="btn-primary">Request a Quote →</Link>
+              <Link href="/products/" className="btn-secondary">View All Products</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. CAPABILITIES STRIP */}
-      <section style={{ background: '#111520', borderTop: '1px solid #2e3648', borderBottom: '1px solid #2e3648', padding: '28px 0' }}>
+      {/* ── 2. CAPABILITIES STRIP ── */}
+      <section style={{ background: '#111520', borderTop: '3px solid #e8a020', borderBottom: '1px solid #2e3648', padding: '0' }}>
         <div className="container">
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0, justifyContent: 'space-around' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
             {capabilities.map((c) => (
-              <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px' }}>
-                <span style={{ width: 6, height: 6, background: '#e8a020', display: 'inline-block', flexShrink: 0 }} />
-                <span style={{ fontSize: '0.88rem', fontWeight: 600, color: '#c8d0de', letterSpacing: '0.02em' }}>{c.label}</span>
+              <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '18px 16px' }}>
+                <span style={{ width: 5, height: 5, background: '#e8a020', display: 'inline-block', flexShrink: 0, transform: 'rotate(45deg)' }} />
+                <span style={{ fontSize: '0.83rem', fontWeight: 600, color: '#c8d0de', letterSpacing: '0.03em', whiteSpace: 'nowrap' }}>{c.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. PRODUCT CATEGORIES */}
-      <section style={{ padding: '100px 0', background: '#1a1f2e' }}>
+      {/* ── 3. PRODUCT LINES ── */}
+      <section style={{ padding: '96px 0', background: '#1a1f2e' }}>
         <div className="container">
-          <div style={{ marginBottom: 56, textAlign: 'center' }}>
+          <div style={{ marginBottom: 60 }}>
             <div className="section-label">Product Lines</div>
             <h2 className="section-title">Three Core Product Lines</h2>
-            <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Every product is fabricated in-house from SPCC cold-rolled steel, finished to IP-rated protection standards, and available for OEM/ODM customisation.
+            <p className="section-subtitle">
+              All products fabricated in-house from SPCC cold-rolled steel. IP-rated, powder-coated, and available for OEM/ODM customisation.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
-            {products.map((p) => (
-              <div key={p.slug} style={{
-                background: '#252b3b', border: '1px solid #2e3648',
-                padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 16,
-              }}>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {products.map((p, i) => (
+              <Link key={p.slug} href={p.slug} style={{ textDecoration: 'none', display: 'block' }}>
                 <div style={{
-                  display: 'inline-block', padding: '4px 12px', background: 'rgba(232,160,32,0.12)',
-                  color: '#e8a020', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em',
-                  textTransform: 'uppercase', width: 'fit-content'
-                }}>{p.tag}</div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#e8eaf0' }}>{p.label}</h3>
-                <p style={{ fontSize: '0.92rem', color: '#8a94a6', lineHeight: 1.75, flex: 1 }}>{p.desc}</p>
-                <Link href={p.slug} style={{ color: '#e8a020', fontSize: '0.9rem', fontWeight: 700, letterSpacing: '0.04em' }}>
-                  Explore Products &rarr;
-                </Link>
-              </div>
+                  display: 'grid',
+                  gridTemplateColumns: i % 2 === 0 ? '1fr 420px' : '420px 1fr',
+                  background: i % 2 === 0 ? '#252b3b' : '#1e2535',
+                  border: '1px solid #2e3648',
+                  minHeight: 260,
+                  transition: 'border-color 0.15s',
+                  cursor: 'pointer',
+                }} className="product-row">
+
+                  {/* Text block — order swaps on even/odd */}
+                  <div style={{
+                    order: i % 2 === 0 ? 0 : 1,
+                    padding: '40px 44px',
+                    display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 14,
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <span style={{ padding: '3px 12px', background: 'rgba(232,160,32,0.12)', color: '#e8a020', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{p.tag}</span>
+                      <span style={{ fontSize: '0.75rem', color: '#4a5568', fontFamily: 'monospace' }}>{p.spec}</span>
+                    </div>
+                    <h3 style={{ fontSize: 'clamp(1.3rem, 2vw, 1.8rem)', fontWeight: 800, color: '#e8eaf0', lineHeight: 1.2 }}>{p.label}</h3>
+                    <p style={{ fontSize: '0.9rem', color: '#8a94a6', lineHeight: 1.75, maxWidth: 520 }}>{p.desc}</p>
+                    <span style={{ color: '#e8a020', fontSize: '0.88rem', fontWeight: 700, letterSpacing: '0.04em' }}>
+                      Explore {p.label} →
+                    </span>
+                  </div>
+
+                  {/* Image block */}
+                  <div style={{
+                    order: i % 2 === 0 ? 1 : 0,
+                    backgroundImage: `url(${p.img})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    minHeight: 260,
+                    position: 'relative',
+                  }}>
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(10,13,20,0.5) 0%, transparent 60%)' }} />
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. STATS */}
-      <section style={{ padding: '100px 0', background: '#1e2535' }}>
+      {/* ── 4. STATS ── */}
+      <section style={{ padding: '80px 0', background: '#111520', borderTop: '1px solid #2e3648' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 2 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 1, marginBottom: 1 }}>
             {stats.map((s, i) => (
               <div key={s.label} style={{
-                background: i % 2 === 0 ? '#252b3b' : '#2a3040',
-                padding: '48px 36px',
-                borderLeft: i === 0 ? '4px solid #e8a020' : 'none'
+                background: '#1a1f2e',
+                padding: '44px 32px',
+                borderLeft: i === 0 ? '4px solid #e8a020' : '1px solid #2e3648',
+                borderTop: '1px solid #2e3648',
               }}>
-                <div style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 800, color: '#e8a020', marginBottom: 8 }}>{s.value}</div>
-                <div style={{ fontSize: '0.9rem', color: '#8a94a6', fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase' }}>{s.label}</div>
+                <div style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#e8a020', marginBottom: 8, letterSpacing: '-0.03em' }}>{s.value}</div>
+                <div style={{ fontSize: '0.82rem', color: '#8a94a6', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{s.label}</div>
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 48, padding: '40px', background: '#252b3b', borderLeft: '4px solid #2e3648' }}>
-            <p style={{ fontSize: '1.05rem', color: '#c8d0de', lineHeight: 1.8, maxWidth: 800 }}>
-              Founded in Chengdu, Sichuan, Synstro operates an integrated manufacturing facility covering steel fabrication, CNC precision processing, in-house powder coating, and final assembly -- enabling full quality control from raw material to finished enclosure.
-            </p>
+
+          {/* Factory photo + copy */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, marginTop: 1 }}>
+            <div style={{
+              backgroundImage: 'url(/images/factory/product-lineup-2.jpg)',
+              backgroundSize: 'cover', backgroundPosition: 'center',
+              minHeight: 280,
+            }} />
+            <div style={{ background: '#1a1f2e', border: '1px solid #2e3648', padding: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div className="section-label" style={{ marginBottom: 12 }}>Manufacturing Base</div>
+              <p style={{ fontSize: '0.95rem', color: '#c8d0de', lineHeight: 1.85 }}>
+                Founded in Chengdu, Sichuan in 2019, Synstro operates an integrated facility covering SPCC steel coil intake, CNC laser cutting, precision bending, TIG/MIG welding, in-house powder coating, and final assembly — full quality control from raw material to finished enclosure.
+              </p>
+              <p style={{ fontSize: '0.88rem', color: '#4a5568', marginTop: 12, lineHeight: 1.7 }}>
+                ISO 9001 · ISO 45001 · OEM &amp; ODM capacity available
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 5. CERTIFICATIONS BAR */}
-      <section style={{ background: '#111520', padding: '36px 0', borderTop: '1px solid #2e3648' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#4a5568', marginBottom: 20 }}>
-            Certifications &amp; Standards
+      {/* ── 5. MANUFACTURING PROCESS ── */}
+      <section style={{ padding: '96px 0', background: '#1a1f2e', borderTop: '1px solid #2e3648' }}>
+        <div className="container">
+          <div style={{ marginBottom: 56 }}>
+            <div className="section-label">How We Build</div>
+            <h2 className="section-title">Integrated Manufacturing Process</h2>
+            <p className="section-subtitle">
+              Every enclosure passes through six in-house production stages before leaving the factory. No subcontracting on structural fabrication.
+            </p>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap', alignItems: 'center' }}>
-            {['ISO 9001', 'ISO 45001', 'OEM / ODM'].map((cert) => (
-              <div key={cert} style={{
-                padding: '10px 28px', border: '1px solid #2e3648',
-                fontSize: '0.9rem', fontWeight: 700, color: '#8a94a6', letterSpacing: '0.06em'
-              }}>{cert}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 1 }}>
+            {processSteps.map((s) => (
+              <div key={s.n} style={{ background: '#252b3b', border: '1px solid #2e3648', padding: '28px 28px 28px 24px', borderLeft: '3px solid #2e3648', position: 'relative' }}>
+                <div style={{ position: 'absolute', top: 24, right: 24, fontSize: '1.8rem', fontWeight: 900, color: 'rgba(232,160,32,0.12)', lineHeight: 1, fontFamily: 'monospace' }}>{s.n}</div>
+                <div style={{ fontSize: '0.72rem', color: '#e8a020', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10 }}>Step {s.n}</div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e8eaf0', marginBottom: 10 }}>{s.title}</div>
+                <div style={{ fontSize: '0.85rem', color: '#8a94a6', lineHeight: 1.7 }}>{s.desc}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. INDUSTRIES SERVED */}
-      <section style={{ padding: '80px 0', background: '#1a1f2e' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <div className="section-label">Industries</div>
-          <h2 className="section-title" style={{ marginBottom: 48 }}>Who We Serve</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'center' }}>
-            {industries.map((ind) => (
-              <div key={ind} style={{
-                padding: '14px 28px', background: '#252b3b',
-                border: '1px solid #2e3648', fontSize: '0.92rem', color: '#c8d0de', fontWeight: 500
-              }}>{ind}</div>
-            ))}
+      {/* ── 6. FACTORY PHOTO STRIP ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, background: '#0d1117' }}>
+        {['/images/factory/hero-factory-2.jpg', '/images/factory/factory-interior-2.jpg'].map((img, i) => (
+          <div key={i} style={{
+            backgroundImage: `url(${img})`,
+            backgroundSize: 'cover', backgroundPosition: 'center',
+            height: 320,
+          }} />
+        ))}
+      </div>
+
+      {/* ── 7. CERTIFICATIONS ── */}
+      <section style={{ background: '#111520', padding: '48px 0', borderTop: '1px solid #2e3648' }}>
+        <div className="container">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 40, flexWrap: 'wrap', justifyContent: 'space-between' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#4a5568' }}>
+              Certifications &amp; Standards
+            </div>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              {['ISO 9001 : 2015', 'ISO 45001 : 2018', 'IP54 / IP65', 'EIA 19" Rack Standard', 'OEM / ODM'].map((cert) => (
+                <div key={cert} style={{ padding: '10px 24px', border: '1px solid #2e3648', fontSize: '0.82rem', fontWeight: 700, color: '#8a94a6', letterSpacing: '0.04em' }}>
+                  {cert}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 7. RFQ CTA */}
-      <section style={{ background: '#0d1117', padding: '100px 0', borderTop: '1px solid #2e3648' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center' }}>
-          <div>
-            <div className="section-label">Get Started</div>
-            <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, color: '#e8eaf0', marginBottom: 16 }}>
-              Ready to Source? Submit Your RFQ.
-            </h2>
-            <p style={{ color: '#8a94a6', fontSize: '1rem', lineHeight: 1.7 }}>
-              Share your project specifications -- capacity, quantity, target delivery date. Our engineering team responds within 48 hours with a formal quotation.
-            </p>
+      {/* ── 8. INDUSTRIES ── */}
+      <section style={{ padding: '80px 0', background: '#1a1f2e', borderTop: '1px solid #2e3648' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+            <div>
+              <div className="section-label">Markets</div>
+              <h2 className="section-title" style={{ marginBottom: 16 }}>Who We Serve</h2>
+              <p style={{ color: '#8a94a6', fontSize: '0.95rem', lineHeight: 1.8 }}>
+                Primary export markets: Middle East &amp; Africa, Southeast Asia, Europe. Procurement managers, system integrators, and EPC contractors sourcing directly from the manufacturer.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+              {industries.map((ind) => (
+                <div key={ind} style={{ padding: '12px 22px', background: '#252b3b', border: '1px solid #2e3648', fontSize: '0.88rem', color: '#c8d0de', fontWeight: 500 }}>
+                  {ind}
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, minWidth: 280 }}>
-            <Link href="/contact/" className="btn-primary" style={{ textAlign: 'center' }}>Submit RFQ &rarr;</Link>
-            <a href="mailto:ztsc1030@gmail.com" style={{ textAlign: 'center', fontSize: '0.88rem', color: '#8a94a6', padding: '10px 0' }}>
-              or email ztsc1030@gmail.com
-            </a>
+        </div>
+      </section>
+
+      {/* ── 9. RFQ CTA ── */}
+      <section style={{ background: '#0d1117', padding: '96px 0', borderTop: '3px solid #e8a020', position: 'relative', overflow: 'hidden' }}>
+        <div style={{
+          position: 'absolute', inset: 0, opacity: 0.03,
+          backgroundImage: 'linear-gradient(#e8a020 1px, transparent 1px), linear-gradient(90deg, #e8a020 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+        }} />
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center', flexWrap: 'wrap' }} className="cta-grid">
+            <div>
+              <div className="section-label">Get Started</div>
+              <h2 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.6rem)', fontWeight: 900, color: '#e8eaf0', marginBottom: 16, lineHeight: 1.15 }}>
+                Ready to Source?<br />Submit Your RFQ.
+              </h2>
+              <p style={{ color: '#8a94a6', fontSize: '0.95rem', lineHeight: 1.8, maxWidth: 480 }}>
+                Share your project specifications — product type, quantity, target delivery. Engineering team responds within 48 hours with a formal quotation.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, minWidth: 240 }}>
+              <Link href="/contact/" className="btn-primary" style={{ textAlign: 'center' }}>Submit RFQ →</Link>
+              <a href="mailto:ztsc1030@gmail.com" style={{ textAlign: 'center', fontSize: '0.82rem', color: '#4a5568', padding: '8px 0', fontFamily: 'monospace' }}>
+                ztsc1030@gmail.com
+              </a>
+            </div>
           </div>
         </div>
       </section>
