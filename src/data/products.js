@@ -1,4 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
+﻿// ─────────────────────────────────────────────────────────────────────────────
 // SYNSTRO Product Data — single source of truth
 // All data confirmed from PDF price list
 // ─────────────────────────────────────────────────────────────────────────────
@@ -204,7 +204,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-4u.jpg',
       },
       {
         slug: 'wb-6406',
@@ -219,7 +219,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-6u.jpg',
       },
       {
         slug: 'wb-6409',
@@ -234,7 +234,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-9u.jpg',
       },
       {
         slug: 'wb-6412',
@@ -249,7 +249,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-12u.jpg',
       },
       {
         slug: 'wb-6415',
@@ -264,7 +264,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-15u.jpg',
       },
       {
         slug: 'wb-6422',
@@ -279,7 +279,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-22u.jpg',
       },
       {
         slug: 'wb-6426',
@@ -294,7 +294,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 450D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-26u.jpg',
       },
     ],
   },
@@ -319,7 +319,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-4u.jpg',
       },
       {
         slug: 'wb-6606',
@@ -334,7 +334,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-6u.jpg',
       },
       {
         slug: 'wb-6609',
@@ -349,7 +349,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-9u.jpg',
       },
       {
         slug: 'wb-6612',
@@ -364,7 +364,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-12u.jpg',
       },
       {
         slug: 'wb-6615',
@@ -379,7 +379,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-15u.jpg',
       },
       {
         slug: 'wb-6622',
@@ -394,7 +394,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-22u.jpg',
       },
       {
         slug: 'wb-6626',
@@ -409,7 +409,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 600D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-26u.jpg',
       },
     ],
   },
@@ -434,7 +434,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 800D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-6u.jpg',
       },
       {
         slug: 'wb-6809',
@@ -449,7 +449,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 800D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-9u.jpg',
       },
       {
         slug: 'wb-6812',
@@ -464,7 +464,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 800D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-12u.jpg',
       },
       {
         slug: 'wb-6815',
@@ -479,7 +479,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 800D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-15u.jpg',
       },
     ],
   },
@@ -504,7 +504,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 1000D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-6u.jpg',
       },
       {
         slug: 'wb-6009',
@@ -519,7 +519,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 1000D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-9u.jpg',
       },
       {
         slug: 'wb-6012',
@@ -534,7 +534,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 1000D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-12u.jpg',
       },
       {
         slug: 'wb-6015',
@@ -549,7 +549,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor',
         notes: 'Heavy-duty wall-mount, 600W x 1000D',
-        image: '/images/server-rack/wn-box-3.png',
+        image: '/images/server-rack/wb-15u.jpg',
       },
     ],
   },
