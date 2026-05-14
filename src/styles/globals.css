@@ -155,3 +155,10 @@ a {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Product lines 3-col → 1-col on mobile */
+@media (max-width: 900px) {
+  .product-lines-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
