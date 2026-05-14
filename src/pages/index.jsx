@@ -270,20 +270,18 @@ export default function Home() {
         ))}
       </div>
 
-      {/* ── 7. CERTIFICATIONS ── */}
-      <section style={{ background: '#111520', padding: '48px 0', borderTop: '1px solid #2e3648' }}>
+      {/* ── 7. CERTIFICATIONS (badge strip) ── */}
+      <section style={{ background: '#111520', padding: '20px 0', borderTop: '1px solid #2e3648' }}>
         <div className="container">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 40, flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#4a5568' }}>
-              Certifications &amp; Standards
-            </div>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              {['ISO 9001 : 2015', 'ISO 45001 : 2018', 'IP54 / IP65', 'EIA 19" Rack Standard', 'OEM / ODM'].map((cert) => (
-                <div key={cert} style={{ padding: '10px 24px', border: '1px solid #2e3648', fontSize: '0.82rem', fontWeight: 700, color: '#8a94a6', letterSpacing: '0.04em' }}>
-                  {cert}
-                </div>
-              ))}
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#4a5568', marginRight: 8, whiteSpace: 'nowrap' }}>
+              Standards
+            </span>
+            {['ISO 9001 : 2015', 'ISO 14001 : 2015', 'ISO 45001 : 2018', 'IP54 / IP65', 'EIA 19"'].map((cert) => (
+              <div key={cert} style={{ padding: '6px 16px', border: '1px solid #2e3648', fontSize: '0.78rem', fontWeight: 600, color: '#6a7485', letterSpacing: '0.04em' }}>
+                {cert}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -310,7 +308,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 9. RFQ CTA ── */}
+      {/* ── 9. CERTIFICATES ── */}
+      <section style={{ padding: '80px 0', background: '#111520', borderTop: '1px solid #2e3648' }}>
+        <div className="container">
+          <div style={{ marginBottom: 48 }}>
+            <div className="section-label">Third-Party Audited</div>
+            <h2 className="section-title">Quality &amp; Compliance Certifications</h2>
+            <p className="section-subtitle" style={{ maxWidth: 560 }}>
+              Issued by Beijing Head International Certification Co., Ltd. (CNAS C046-M). Valid through 2027-12-12.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }} className="certs-grid">
+            {[
+              {
+                img: '/images/certs/iso-9001.png',
+                standard: 'ISO 9001 : 2015',
+                title: 'Quality Management System',
+                no: '04624Q15981R0S',
+                scope: 'Sales of Metal Products, Electronic Components and Communication Equipment',
+              },
+              {
+                img: '/images/certs/iso-14001.png',
+                standard: 'ISO 14001 : 2015',
+                title: 'Environmental Management System',
+                no: '04624E12980R0S',
+                scope: 'Sales of Metal Products, Electronic Components and Communication Equipment and Related Management Activities',
+              },
+              {
+                img: '/images/certs/iso-45001.png',
+                standard: 'ISO 45001 : 2018',
+                title: 'Occupational Health & Safety Management System',
+                no: '04624S12905R0S',
+                scope: 'Sales of Metal Products, Electronic Components and Communication Equipment and Related Management Activities',
+              },
+            ].map((c) => (
+              <div key={c.standard} style={{ background: '#1a1f2e', border: '1px solid #2e3648', overflow: 'hidden' }}>
+                {/* Certificate thumbnail */}
+                <div style={{ background: '#0d1117', borderBottom: '1px solid #2e3648', padding: '20px', display: 'flex', justifyContent: 'center' }}>
+                  <img
+                    src={c.img}
+                    alt={c.standard + ' Certificate — Sichuan Sanchuang Zhengteng Technology'}
+                    style={{ width: '100%', maxWidth: 240, aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+                  />
+                </div>
+                {/* Info */}
+                <div style={{ padding: '20px 22px 24px' }}>
+                  <div style={{ fontSize: '0.72rem', color: '#e8a020', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>
+                    {c.standard}
+                  </div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e8eaf0', marginBottom: 10, lineHeight: 1.3 }}>
+                    {c.title}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: '#4a5568', fontFamily: 'monospace', marginBottom: 10 }}>
+                    Cert No. {c.no}
+                  </div>
+                  <div style={{ fontSize: '0.78rem', color: '#6a7485', lineHeight: 1.65 }}>
+                    {c.scope}
+                  </div>
+                  <div style={{ marginTop: 14, paddingTop: 14, borderTop: '1px solid #2e3648', display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#4a5568' }}>
+                    <span>Issued: 2024-12-13</span>
+                    <span>Valid: 2027-12-12</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Issuing body note */}
+          <div style={{ marginTop: 20, padding: '14px 20px', background: '#1a1f2e', border: '1px solid #2e3648', display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.72rem', color: '#4a5568', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Issued By</span>
+            <span style={{ fontSize: '0.82rem', color: '#6a7485' }}>Beijing Head International Certification Co., Ltd. &nbsp;·&nbsp; CNAS Accredited (C046-M) &nbsp;·&nbsp; IAF MLA Signatory</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10. RFQ CTA ── */}
       <section style={{ background: '#0d1117', padding: '96px 0', borderTop: '3px solid #e8a020', position: 'relative', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0, opacity: 0.03,
