@@ -275,6 +275,150 @@ export const serverRackGroups = [
     ],
   },
 
+  // ── Floor-Standing Network Cabinet ───────────────────────────────────────
+  // Models with confirmed product images only (14U / 22U / 36U / 42U)
+  // FM/FD/FB/FK = 4 grade variants by steel thickness
+  {
+    id: 'floor-standing',
+    label: 'Floor-Standing Network Cabinet',
+    shortLabel: 'Floor-Standing',
+    material: 'SPCC steel, 4 grade configurations (FM / FD / FB / FK)',
+    products: [
+      {
+        slug: 'fs-14u',
+        model: 'F-6614',
+        label: 'F-6614 Floor-Standing Cabinet 14U',
+        uSize: '14U',
+        image: '/images/floor-standing/fs-14u.png',
+        dims: '600 x 600 x 14U',
+        color: 'Black / Grey-White',
+        door: 'Tempered glass / Perforated optional',
+        notes: '19-inch standard. 4 grade configurations available.',
+        variants: [
+          {
+            grade: 'FM', model: 'F-6614-FM',
+            material: 'Column 1.2mm / Cross member 1.2mm / Other 0.6mm',
+            accessories: 'Tray x1',
+          },
+          {
+            grade: 'FD', model: 'F-6614-FD',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 0.8mm',
+            accessories: 'Tray x1',
+          },
+          {
+            grade: 'FB', model: 'F-6614-FB',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 1.0mm',
+            accessories: 'Tray x1',
+          },
+          {
+            grade: 'FK', model: 'F-6614-FK',
+            material: 'Column 2.0mm / Cross member 1.5mm / Other 1.2mm',
+            accessories: 'Tray x1',
+          },
+        ],
+      },
+      {
+        slug: 'fs-22u',
+        model: 'F-6622',
+        label: 'F-6622 Floor-Standing Cabinet 22U',
+        uSize: '22U',
+        image: '/images/floor-standing/fs-22u.png',
+        dims: '600 x 600 x 22U',
+        color: 'Black / Grey-White',
+        door: 'Tempered glass / Perforated optional',
+        notes: '19-inch standard. 4 grade configurations available.',
+        variants: [
+          {
+            grade: 'FM', model: 'F-6622-FM',
+            material: 'Column 1.2mm / Cross member 1.2mm / Other 0.6mm',
+            accessories: 'Tray x1',
+          },
+          {
+            grade: 'FD', model: 'F-6622-FD',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 0.8mm',
+            accessories: 'Tray x1',
+          },
+          {
+            grade: 'FB', model: 'F-6622-FB',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 1.0mm',
+            accessories: 'Tray x1',
+          },
+          {
+            grade: 'FK', model: 'F-6622-FK',
+            material: 'Column 2.0mm / Cross member 1.5mm / Other 1.2mm',
+            accessories: 'Tray x1',
+          },
+        ],
+      },
+      {
+        slug: 'fs-36u',
+        model: 'F-6636',
+        label: 'F-6636 Floor-Standing Cabinet 36U',
+        uSize: '36U',
+        image: '/images/floor-standing/fs-36u.png',
+        dims: '600 x 600 x 36U',
+        color: 'Black / Grey-White',
+        door: 'Tempered glass / Perforated optional',
+        notes: '19-inch standard. 4 grade configurations available.',
+        variants: [
+          {
+            grade: 'FM', model: 'F-6636-FM',
+            material: 'Column 1.2mm / Cross member 1.2mm / Other 0.6mm',
+            accessories: 'Tray x2',
+          },
+          {
+            grade: 'FD', model: 'F-6636-FD',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 0.8mm',
+            accessories: 'Tray x2',
+          },
+          {
+            grade: 'FB', model: 'F-6636-FB',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 1.0mm',
+            accessories: 'Tray x2',
+          },
+          {
+            grade: 'FK', model: 'F-6636-FK',
+            material: 'Column 2.0mm / Cross member 1.5mm / Other 1.2mm',
+            accessories: 'Tray x2',
+          },
+        ],
+      },
+      {
+        slug: 'fs-42u',
+        model: 'F-6642',
+        label: 'F-6642 Floor-Standing Cabinet 42U',
+        uSize: '42U',
+        image: '/images/floor-standing/fs-42u.png',
+        dims: '600 x 600 x 42U',
+        color: 'Black / Grey-White',
+        door: 'Tempered glass / Perforated optional',
+        notes: '19-inch standard. 4 grade configurations available.',
+        variants: [
+          {
+            grade: 'FM', model: 'F-6642-FM',
+            material: 'Column 1.2mm / Cross member 1.2mm / Other 0.6mm',
+            accessories: 'Tray x2',
+          },
+          {
+            grade: 'FD', model: 'F-6642-FD',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 0.8mm',
+            accessories: 'Tray x2',
+          },
+          {
+            grade: 'FB', model: 'F-6642-FB',
+            material: 'Column 2.0mm / Cross member 1.2mm / Other 1.0mm',
+            accessories: 'Tray x3',
+          },
+          {
+            grade: 'FK', model: 'F-6642-FK',
+            material: 'Column 2.0mm / Cross member 1.5mm / Other 1.2mm',
+            accessories: 'Tray x3',
+          },
+        ],
+      },
+    ],
+  },
+
   // ── Outdoor Series: IP55 Weatherproof Cabinet ────────────────────────────
   {
     id: 'outdoor',
