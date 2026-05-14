@@ -143,3 +143,15 @@ a {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Homepage product row hover */
+.product-row:hover {
+  border-color: #e8a020 !important;
+}
+
+/* CTA grid — stack on narrow screens */
+@media (max-width: 640px) {
+  .cta-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
