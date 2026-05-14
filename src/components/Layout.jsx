@@ -9,7 +9,7 @@ export default function Layout({ children, title, description }) {
   return (
     <>
       <Head>
-        <title>{title || 'Synstro 鈥?Industrial Enclosures & Energy Storage Manufacturer'}</title>
+        <title>{title || 'Synstro — Industrial Enclosures & Energy Storage Manufacturer'}</title>
         <meta name="description" content={description || 'BESS cabinets, server racks and PDU systems. SPCC steel, IP54/IP65, ISO 9001 certified. OEM/ODM for system integrators and EPC contractors.'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
@@ -36,7 +36,7 @@ export default function Layout({ children, title, description }) {
               onMouseEnter={() => setProductsOpen(true)}
               onMouseLeave={() => setProductsOpen(false)}>
               <span style={{ fontSize: '0.9rem', color: '#8a94a6', fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase', cursor: 'pointer' }}>
-                Products 鈻?              </span>
+                Products ▾</span>
               {productsOpen && (
                 <div style={{
                   position: 'absolute', top: '100%', left: 0, background: '#1a1f2e',
