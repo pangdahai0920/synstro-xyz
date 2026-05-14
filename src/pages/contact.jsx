@@ -1,7 +1,7 @@
 import Layout from '../components/Layout'
 import { useState } from 'react'
 
-const WEB3FORMS_KEY = '241d472a-ca6e-4845-9148-3cff0a257e91'
+const WEB3FORMS_KEY = 'a8aff6d9-89fe-41b8-ab20-c0e222067d1b'
 
 export default function Contact() {
   const [form, setForm] = useState({
