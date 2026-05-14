@@ -45,37 +45,45 @@ function SpecTable({ product }) {
   )
 }
 
-// ── WB variant selector + spec table ──────────────────────────────────────
-function WBVariantPanel({ product }) {
+// ── Variant selector + spec table (WB: depth / FS: grade) ─────────────────
+function VariantPanel({ product }) {
   const [activeIdx, setActiveIdx] = useState(0)
   const v = product.variants[activeIdx]
 
+  // Detect variant key: WB uses 'depth', FS uses 'grade'
+  const variantKey = v.depth ? 'depth' : 'grade'
+  const selectorLabel = variantKey === 'depth' ? 'Select Depth' : 'Select Grade'
+
+  // Build spec rows — filter keys that exist on this variant type
   const commonRows = [
-    { key: 'Rack Size',  value: product.uSize },
-    { key: 'Material',   value: product.material },
-    { key: 'Door',       value: product.door },
-    { key: 'Color',      value: product.color },
-  ]
+    { key: 'Rack Size', value: product.uSize },
+    { key: 'Door',      value: product.door },
+    { key: 'Color',     value: product.color },
+    product.notes ? { key: 'Notes', value: product.notes } : null,
+  ].filter(Boolean)
+
   const variantRows = [
-    { key: 'Model No.',             value: v.model },
-    { key: 'Dimensions (W × D × H)', value: v.dims },
-    { key: 'Net Weight',            value: v.weight !== 'N/A' ? v.weight : '— (contact for data)' },
-    { key: 'Volume',                value: v.volume },
-    { key: 'Accessories',           value: v.accessories },
-  ]
+    { key: 'Model No.',              value: v.model },
+    v.dims   ? { key: 'Dimensions (W × D × H)', value: v.dims } : null,
+    v.weight ? { key: 'Net Weight',  value: v.weight !== 'N/A' ? v.weight : '— (contact for data)' } : null,
+    v.volume ? { key: 'Volume',      value: v.volume } : null,
+    { key: 'Material',               value: v.material },
+    { key: 'Accessories',            value: v.accessories },
+  ].filter(Boolean)
+
   const allRows = [...variantRows, ...commonRows]
 
   return (
     <div>
-      {/* Depth selector */}
+      {/* Variant selector */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: '0.78rem', color: '#8a94a6', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10 }}>
-          Select Depth
+          {selectorLabel}
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {product.variants.map((variant, idx) => (
             <button
-              key={variant.depth}
+              key={variant[variantKey]}
               onClick={() => setActiveIdx(idx)}
               style={{
                 padding: '8px 20px',
@@ -89,7 +97,7 @@ function WBVariantPanel({ product }) {
                 transition: 'all 0.15s',
               }}
             >
-              {variant.depth}
+              {variant[variantKey]}
             </button>
           ))}
         </div>
@@ -98,7 +106,7 @@ function WBVariantPanel({ product }) {
         </div>
       </div>
 
-      {/* Spec table for selected variant */}
+      {/* Spec table */}
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 40 }}>
         <tbody>
           {allRows.map((row, i) => (
@@ -115,12 +123,17 @@ function WBVariantPanel({ product }) {
 
 // ── Page component ─────────────────────────────────────────────────────────
 export default function ProductDetail({ product, siblings }) {
-  const isWB = Boolean(product.variants)
+  const hasVariants = Boolean(product.variants)
+  const isWB = hasVariants  // keep alias for JSX below
 
   const mailSubject = encodeURIComponent('Inquiry: ' + (isWB ? product.model : product.model))
   const mailBody = encodeURIComponent(
     'Hi Synstro,\n\nI am interested in the ' + product.label + '.\n\n' +
-    (isWB ? 'Preferred depth (D450/D600/D800/D1000):\n' : '') +
+    (product.variants
+      ? (product.variants[0].depth
+          ? 'Preferred depth (D450 / D600 / D800 / D1000):\n'
+          : 'Preferred grade (FM / FD / FB / FK):\n')
+      : '') +
     'Required quantity:\nTarget delivery:\nProject details:\n\nPlease send your best quote.'
   )
 
@@ -173,8 +186,8 @@ export default function ProductDetail({ product, siblings }) {
               </h1>
               <div style={{ color: '#8a94a6', fontSize: '0.95rem', marginBottom: 32 }}>{product.label}</div>
 
-              {/* Spec block — WB gets variant selector, others get flat table */}
-              {isWB ? <WBVariantPanel product={product} /> : <SpecTable product={product} />}
+              {/* Spec block — variant products get selector, others get flat table */}
+              {isWB ? <VariantPanel product={product} /> : <SpecTable product={product} />}
 
               {/* CTA */}
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
