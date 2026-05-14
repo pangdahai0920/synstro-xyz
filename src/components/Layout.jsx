@@ -1,4 +1,4 @@
-import Head from 'next/head'
+﻿import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -9,7 +9,7 @@ export default function Layout({ children, title, description }) {
   return (
     <>
       <Head>
-        <title>{title || 'Synstro – Industrial Enclosures & Energy Storage Manufacturer'}</title>
+        <title>{title || 'Synstro 鈥?Industrial Enclosures & Energy Storage Manufacturer'}</title>
         <meta name="description" content={description || 'BESS cabinets, server racks and PDU systems. SPCC steel, IP54/IP65, ISO 9001 certified. OEM/ODM for system integrators and EPC contractors.'} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
@@ -36,8 +36,7 @@ export default function Layout({ children, title, description }) {
               onMouseEnter={() => setProductsOpen(true)}
               onMouseLeave={() => setProductsOpen(false)}>
               <span style={{ fontSize: '0.9rem', color: '#8a94a6', fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase', cursor: 'pointer' }}>
-                Products ▾
-              </span>
+                Products 鈻?              </span>
               {productsOpen && (
                 <div style={{
                   position: 'absolute', top: '100%', left: 0, background: '#1a1f2e',
@@ -92,14 +91,14 @@ export default function Layout({ children, title, description }) {
             <div>
               <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#e8a020', marginBottom: 16 }}>Contact</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <a href="mailto:info@synstro.xyz" style={{ fontSize: '0.9rem', color: '#8a94a6' }}>info@synstro.xyz</a>
+                <a href="mailto:ztsc1030@gmail.com" style={{ fontSize: '0.9rem', color: '#8a94a6' }}>ztsc1030@gmail.com</a>
                 <p style={{ fontSize: '0.9rem', color: '#8a94a6' }}>Chengdu, Sichuan, China</p>
-                <p style={{ fontSize: '0.85rem', color: '#8a94a6' }}>ISO 9001 · ISO 45001</p>
+                <p style={{ fontSize: '0.85rem', color: '#8a94a6' }}>ISO 9001 路 ISO 45001</p>
               </div>
             </div>
           </div>
           <div style={{ borderTop: '1px solid #2e3648', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <p style={{ fontSize: '0.82rem', color: '#4a5568' }}>© 2024 Sichuan Sanchuang Zhengteng Technology Co., Ltd. All rights reserved.</p>
+            <p style={{ fontSize: '0.82rem', color: '#4a5568' }}>漏 2024 Sichuan Sanchuang Zhengteng Technology Co., Ltd. All rights reserved.</p>
             <p style={{ fontSize: '0.82rem', color: '#4a5568' }}>synstro.xyz</p>
           </div>
         </div>
@@ -107,3 +106,4 @@ export default function Layout({ children, title, description }) {
     </>
   )
 }
+
