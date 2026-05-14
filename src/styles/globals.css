@@ -162,3 +162,10 @@ a {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Certs grid — 3-col → 1-col on mobile */
+@media (max-width: 860px) {
+  .certs-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
