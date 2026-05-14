@@ -35,12 +35,12 @@ export default function Layout({ children, title, description }) {
             <div style={{ position: 'relative' }}
               onMouseEnter={() => setProductsOpen(true)}
               onMouseLeave={() => setProductsOpen(false)}>
-              <span style={{ fontSize: '0.9rem', color: '#8a94a6', fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase', cursor: 'pointer' }}>
+              <span style={{ fontSize: '0.9rem', color: '#8a94a6', fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase', cursor: 'pointer', display: 'block', padding: '8px 0' }}>
                 Products ▾</span>
               {productsOpen && (
                 <div style={{
                   position: 'absolute', top: '100%', left: 0, background: '#1a1f2e',
-                  border: '1px solid #2e3648', padding: '8px 0', minWidth: 220, marginTop: 8
+                  border: '1px solid #2e3648', padding: '8px 0', minWidth: 220
                 }}>
                   <Link href="/products/bess-cabinet/" style={{ display: 'block', padding: '10px 20px', fontSize: '0.9rem', color: '#e8eaf0' }}>BESS Cabinets</Link>
                   <Link href="/products/server-rack/" style={{ display: 'block', padding: '10px 20px', fontSize: '0.9rem', color: '#e8eaf0' }}>Server Racks</Link>
