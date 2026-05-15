@@ -25,7 +25,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Expansion screws x4',
         notes: 'Vertical mount. Welded — non-disassemblable.',
-        image: '/images/server-rack/wn-box.png',
+        image: '/images/server-rack/wnv-2u.png',
       },
       {
         slug: 'wnv-4u',
@@ -40,7 +40,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Expansion screws x4',
         notes: 'Vertical mount. Welded — non-disassemblable.',
-        image: '/images/server-rack/wn-box.png',
+        image: '/images/server-rack/wnv-4u.png',
       },
     ],
   },
@@ -135,7 +135,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: '4 mounting profiles, 2 movable side panels, 1 fixed back panel',
-        image: '/images/server-rack/wn-box.png',
+        image: '/images/server-rack/wl-4u.png',
       },
       {
         slug: 'wl-6u',
@@ -150,7 +150,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: '4 mounting profiles, 2 movable side panels, 1 fixed back panel',
-        image: '/images/server-rack/wn-box.png',
+        image: '/images/server-rack/wl-6u.png',
       },
       {
         slug: 'wl-9u',
@@ -165,7 +165,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1',
         notes: '4 mounting profiles, 2 movable side panels, 1 fixed back panel',
-        image: '/images/server-rack/wn-box-2.png',
+        image: '/images/server-rack/wl-9u.png',
       },
       {
         slug: 'wl-12u',
@@ -180,7 +180,7 @@ export const serverRackGroups = [
         color: 'Black / Grey-White',
         accessories: 'Tray x1, Castor x4',
         notes: '4 mounting profiles, 2 movable side panels, 1 fixed back panel',
-        image: '/images/server-rack/wn-box-2.png',
+        image: '/images/server-rack/wl-12u.png',
       },
     ],
   },
