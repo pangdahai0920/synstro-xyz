@@ -1,7 +1,43 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Layout from '../../../components/Layout'
 import Link from 'next/link'
 import { pduTypes, pduConfig, getPduBySlug } from '../../../data/pdu'
+
+// ── Lightbox ────────────────────────────────────────────────────────────────
+function Lightbox({ src, alt, onClose }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: 'rgba(0,0,0,0.92)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'zoom-out',
+      }}
+    >
+      <button
+        onClick={onClose}
+        style={{
+          position: 'absolute', top: 20, right: 28,
+          background: 'none', border: 'none', color: '#e8eaf0',
+          fontSize: '2rem', cursor: 'pointer', lineHeight: 1, padding: 0,
+        }}
+      >×</button>
+      <img
+        src={src}
+        alt={alt}
+        onClick={(e) => e.stopPropagation()}
+        style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', cursor: 'default', boxShadow: '0 0 80px rgba(0,0,0,0.8)' }}
+      />
+    </div>
+  )
+}
 
 export async function getStaticPaths() {
   return {
@@ -125,6 +161,8 @@ const btnStyle = (active) => ({
 
 // ── Page ──────────────────────────────────────────────────────────────────
 export default function PduDetail({ product }) {
+  const [lightbox, setLightbox] = useState(false)
+  const closeLightbox = useCallback(() => setLightbox(false), [])
   return (
     <Layout
       title={product.name + ' — Configurable Rack PDU | Synstro'}
@@ -145,10 +183,17 @@ export default function PduDetail({ product }) {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'minmax(260px, 420px) 1fr', gap: 48, alignItems: 'start' }} className="detail-grid">
 
-            {/* LEFT — image */}
-            <div style={{ background: '#252b3b', border: '1px solid #2e3648', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, aspectRatio: '1' }}>
+            {/* LEFT — image (click to enlarge) */}
+            <div
+              onClick={() => setLightbox(true)}
+              style={{ background: '#252b3b', border: '1px solid #2e3648', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 32, aspectRatio: '1', cursor: 'zoom-in', position: 'relative' }}
+            >
               <img src={product.image} alt={product.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+              <span style={{ position: 'absolute', bottom: 10, right: 12, fontSize: '0.7rem', color: '#4a5568', fontWeight: 600, letterSpacing: '0.06em', pointerEvents: 'none' }}>
+                CLICK TO ENLARGE
+              </span>
             </div>
+            {lightbox && <Lightbox src={product.image} alt={product.name} onClose={closeLightbox} />}
 
             {/* RIGHT */}
             <div>
