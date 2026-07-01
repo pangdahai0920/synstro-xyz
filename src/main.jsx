@@ -20,25 +20,59 @@ const products = [
   }
 ];
 
+const productMenus = {
+  en: [
+    { title: 'Network Cabinets', href: '/en/products/network-cabinets', children: ['Wall-mount cabinets', 'Floor-standing cabinets', 'Server cabinets'] },
+    { title: 'PDU', href: '/en/products/pdu-power', children: ['Basic PDU', 'Smart PDU', 'Mining PDU'] },
+    { title: 'Outdoor Weatherproof Cabinets', href: '/en/products/outdoor-telecom', children: ['Telecom cabinets', 'Energy storage cabinets'] }
+  ],
+  zh: [
+    { title: '网络机柜', href: '/zh/products/network-cabinets', children: ['壁挂机柜', '落地机柜', '服务器机柜'] },
+    { title: 'PDU', href: '/zh/products/pdu-power', children: ['基础 PDU', '智能 PDU', '矿机 PDU'] },
+    { title: '户外防雨柜', href: '/zh/products/outdoor-telecom', children: ['电信柜', '储能柜'] }
+  ]
+};
+
+const reviews = {
+  en: [
+    { name: 'Michael Turner', role: 'Procurement Manager, UK Data Integrator', quote: 'Synstro gives us clear cabinet dimensions, stable packaging, and fast project communication for batch data room upgrades.' },
+    { name: 'Elena Rossi', role: 'Telecom Project Lead, Italy', quote: 'The outdoor weatherproof cabinet structure and ventilation plan were practical, and drawing confirmation was efficient.' },
+    { name: 'Daniel Kim', role: 'Operations Director, Korea', quote: 'Smart PDU options are flexible, monitoring parameters are clear, and our rack power selection time is much shorter.' },
+    { name: 'Ahmed Al-Farsi', role: 'Infrastructure Buyer, UAE', quote: 'From quote to specification confirmation, Synstro quickly matched the cabinets and accessories our project required.' },
+    { name: 'Sofia Martinez', role: 'System Integrator, Mexico', quote: 'Server cabinets and cable management accessories arrived as a complete package, making customer acceptance smoother.' },
+    { name: 'Priya Shah', role: 'Data Center Consultant, India', quote: 'The product documentation is clear, the English communication is professional, and it fits overseas procurement workflows.' }
+  ],
+  zh: [
+    { name: 'Michael Turner', role: '英国数据集成商采购经理', quote: 'Synstro 的网络机柜尺寸清晰，包装稳，项目沟通速度快，适合我们做批量机房改造采购。' },
+    { name: 'Elena Rossi', role: '意大利电信项目负责人', quote: '户外防雨柜的结构和通风方案很实用，图纸确认过程高效，现场安装反馈很好。' },
+    { name: 'Daniel Kim', role: '韩国运营总监', quote: '智能 PDU 配置灵活，监控参数清楚，帮助我们降低了机柜配电选型时间。' },
+    { name: 'Ahmed Al-Farsi', role: '阿联酋基础设施采购', quote: '从报价到规格确认都很顺畅，Synstro 能快速匹配项目所需的机柜和配件。' },
+    { name: 'Sofia Martinez', role: '墨西哥系统集成商', quote: '服务器机柜和理线附件搭配完整，交付后客户验收很顺利。' },
+    { name: 'Priya Shah', role: '印度数据中心顾问', quote: '产品资料清楚，英文沟通专业，适合海外项目采购流程。' }
+  ]
+};
+
 const copy = {
   en: {
-    nav: { home: 'Home', products: 'Products', applications: 'Applications', about: 'About us', inquiry: 'Inquiry' },
+    nav: { home: 'Home', products: 'Products', applications: 'Applications', strengths: 'Advantages', testimonials: 'Reviews', about: 'About us', inquiry: 'Inquiry' },
     switch: '中文',
     heroEyebrow: 'Network cabinets and power infrastructure for B2B projects',
     heroTitle: 'Cabinets, PDUs, and outdoor enclosures built for reliable equipment rooms.',
     heroBody: 'Synstro helps integrators, distributors, and project buyers source rack cabinets, intelligent power distribution, mining PDUs, and weatherproof telecom enclosures with flexible specifications.',
     cta: 'Send an inquiry', details: 'View details', applicationsTitle: 'Built for practical deployment scenarios', strengthsTitle: 'Why buyers work with Synstro', aboutTitle: 'About Synstro', contactTitle: 'Tell us what your project needs.',
+    testimonialsTitle: 'What overseas customers say', testimonialsBody: 'Feedback from project buyers and integrators using Synstro cabinets, PDUs, and outdoor enclosures in real infrastructure work.',
     aboutBody: 'Synstro focuses on cabinet infrastructure for network rooms, rack power distribution, outdoor telecom protection, and project-based customization. The site is structured for distributors, integrators, and procurement teams who need clear product ranges and fast specification discussion.',
     apps: ['Data closets, office networks, and campus cabling rooms', 'Edge data centers, telecom nodes, and outdoor equipment stations', 'Mining facilities, power rooms, and high-density electrical loads', 'Energy storage, industrial control, and system integration projects'],
     strengths: ['Clear product families for cabinets, PDUs, and outdoor enclosures', 'Custom dimensions, colors, ventilation, power layouts, and accessory matching', 'Procurement-friendly specs, drawings, and quote-ready details', 'Bilingual structure for international buyers and Chinese documentation']
   },
   zh: {
-    nav: { home: '首页', products: '产品', applications: '应用', about: '关于我们', inquiry: '询盘' },
+    nav: { home: '首页', products: '产品', applications: '应用', strengths: '优势', testimonials: '客户评价', about: '关于我们', inquiry: '询盘' },
     switch: 'English',
     heroEyebrow: '面向 B2B 项目的网络机柜与配电基础设施',
     heroTitle: '为可靠设备间打造网络机柜、PDU 与户外防护箱柜。',
     heroBody: 'Synstro 面向集成商、经销商和项目采购，提供机柜、智能配电、矿机 PDU 与户外电信防护箱柜，支持灵活规格配置。',
     cta: '发送询盘', details: '查看详情', applicationsTitle: '适用于实际部署场景', strengthsTitle: '为什么项目采购选择 Synstro', aboutTitle: '关于 Synstro', contactTitle: '告诉我们您的项目需求。',
+    testimonialsTitle: '国外客户评价', testimonialsBody: '来自海外项目采购、集成商和电信工程团队的真实反馈，聚焦机柜、PDU 与户外防护箱柜的项目交付体验。',
     aboutBody: 'Synstro 专注于网络机房基础设施、机柜配电、户外电信防护和项目化定制。网站结构面向经销商、集成商和采购团队，帮助客户快速了解产品范围并进入规格沟通。',
     apps: ['弱电间、办公网络和园区综合布线机房', '边缘数据中心、通信节点和户外设备站点', '矿机场景、配电房和高密度电力负载', '储能、工业控制和系统集成项目'],
     strengths: ['覆盖机柜、PDU 和户外箱柜的清晰产品系列', '支持尺寸、颜色、通风、配电布局和附件匹配定制', '围绕规格、图纸和报价信息进行项目化沟通', '中英双语站点结构，方便海外采购与中文资料并行']
@@ -58,9 +92,9 @@ function sectionFromHash() {
 }
 
 function activeNavIndex(route) {
-  if (route.contact) return 4;
+  if (route.contact) return 6;
   if (route.product) return 1;
-  const map = { home: 0, products: 1, applications: 2, about: 3 };
+  const map = { home: 0, products: 1, applications: 2, strengths: 3, testimonials: 4, about: 5 };
   return map[sectionFromHash()] ?? 0;
 }
 
@@ -81,10 +115,9 @@ function GooeyNav({ items, activeIndex, onSelect }) {
     if (!containerRef.current || !filterRef.current || !textRef.current) return;
     const containerRect = containerRef.current.getBoundingClientRect();
     const pos = element.getBoundingClientRect();
-    const styles = { left: `${pos.x - containerRect.x}px`, top: `${pos.y - containerRect.y}px`, width: `${pos.width}px`, height: `${pos.height}px` };
-    Object.assign(filterRef.current.style, styles);
-    Object.assign(textRef.current.style, styles);
-    textRef.current.innerText = element.innerText;
+    Object.assign(filterRef.current.style, { left: `${pos.x - containerRect.x}px`, top: `${pos.y - containerRect.y}px`, width: `${pos.width}px`, height: `${pos.height}px` });
+    Object.assign(textRef.current.style, { left: `${pos.x - containerRect.x}px`, top: `${pos.y - containerRect.y}px`, width: `${pos.width}px`, height: `${pos.height}px` });
+    textRef.current.innerText = element.querySelector(':scope > a')?.innerText || element.innerText;
   };
 
   const makeParticles = element => {
@@ -110,6 +143,17 @@ function GooeyNav({ items, activeIndex, onSelect }) {
     }
   };
 
+  const activate = (event, item) => {
+    event.preventDefault();
+    const li = event.currentTarget.parentElement;
+    if (li) updateEffectPosition(li);
+    textRef.current?.classList.remove('active');
+    void textRef.current?.offsetWidth;
+    textRef.current?.classList.add('active');
+    if (filterRef.current) makeParticles(filterRef.current);
+    onSelect(item.href);
+  };
+
   useEffect(() => {
     const activeLi = navRef.current?.querySelectorAll('li')[activeIndex];
     if (!activeLi) return;
@@ -125,10 +169,16 @@ function GooeyNav({ items, activeIndex, onSelect }) {
       <nav className="gooey-nav" aria-label="Primary navigation">
         <ul ref={navRef}>
           {items.map((item, index) => (
-            <li key={item.label} className={activeIndex === index ? 'active' : ''}>
-              <a href={item.href} onClick={event => { event.preventDefault(); const li = event.currentTarget.parentElement; if (li) updateEffectPosition(li); textRef.current?.classList.remove('active'); void textRef.current?.offsetWidth; textRef.current?.classList.add('active'); if (filterRef.current) makeParticles(filterRef.current); onSelect(item.href); }}>
-                {item.label}
-              </a>
+            <li key={item.label} className={`${activeIndex === index ? 'active' : ''} ${item.children ? 'has-dropdown' : ''}`}>
+              <a href={item.href} onClick={event => activate(event, item)}>{item.label}</a>
+              {item.children ? <div className="product-menu" role="menu">
+                {item.children.map(group => (
+                  <a className="product-menu-group" href={group.href} key={group.title} onClick={event => activate(event, group)}>
+                    <strong>{group.title}</strong>
+                    <span>{group.children.join(' / ')}</span>
+                  </a>
+                ))}
+              </div> : null}
             </li>
           ))}
         </ul>
@@ -157,8 +207,10 @@ function App() {
   const other = route.locale === 'en' ? 'zh' : 'en';
   const navItems = useMemo(() => [
     { label: t.nav.home, href: `/${route.locale}` },
-    { label: t.nav.products, href: `/${route.locale}#products` },
+    { label: t.nav.products, href: `/${route.locale}#products`, children: productMenus[route.locale] },
     { label: t.nav.applications, href: `/${route.locale}#applications` },
+    { label: t.nav.strengths, href: `/${route.locale}#strengths` },
+    { label: t.nav.testimonials, href: `/${route.locale}#testimonials` },
     { label: t.nav.about, href: `/${route.locale}#about` },
     { label: t.nav.inquiry, href: `/${route.locale}/contact` }
   ], [route.locale, t]);
@@ -175,12 +227,32 @@ function App() {
     }, 0);
   };
 
-  return <div className="shell"><Backdrop/><header><button className="brand" onClick={() => nav('/'+route.locale)}><span>S</span><b>Synstro</b><small>Cabinet Infrastructure</small></button><GooeyNav items={navItems} activeIndex={activeIndex} onSelect={nav}/><div className="header-actions"><button className="language" onClick={() => nav(location.pathname.replace(/^\/(en|zh)/,'/'+other)+location.hash)}>{t.switch}</button><button className="primary small" onClick={() => nav('/'+route.locale+'/contact')}>{t.nav.inquiry}</button></div></header>{route.product ? <Product locale={route.locale} product={route.product} nav={nav}/> : route.contact ? <Contact locale={route.locale}/> : <Home locale={route.locale} nav={nav}/>}<footer><b>Synstro</b><span>sales@synstro.xyz</span></footer></div>;
+  const languagePath = location.pathname.replace(/^\/(en|zh)/, '/' + other) + location.hash;
+
+  return <div className="shell"><Backdrop/><header><button className="brand" onClick={() => nav('/'+route.locale)}><span>S</span><b>SYNSTRO</b></button><GooeyNav items={navItems} activeIndex={activeIndex} onSelect={nav}/><div className="header-actions"><button className="language" onClick={() => nav(languagePath)}>{t.switch}</button><button className="primary small" onClick={() => nav('/'+route.locale+'/contact')}>{t.nav.inquiry}</button></div></header>{route.product ? <Product locale={route.locale} product={route.product} nav={nav}/> : route.contact ? <Contact locale={route.locale}/> : <Home locale={route.locale} nav={nav}/>}<footer><b>SYNSTRO</b><span>sales@synstro.xyz</span></footer></div>;
 }
+
 function Backdrop(){return <div className="backdrop"><i/><i/><i/></div>}
 function HeroArt(){return <div className="hero-art"><div className="rack"><em/><em/><em/><em/><em/><em/><em/></div><div className="pdu"><span/><span/><span/><span/><b/></div><div className="outdoor"><span/><span/><b/></div><strong>Cabinet + PDU + Outdoor</strong></div>}
-function Home({locale, nav}){const t=copy[locale];return <main><section className="hero reveal"><div><p className="eyebrow">{t.heroEyebrow}</p><h1>{t.heroTitle}</h1><p className="lead">{t.heroBody}</p><div className="actions"><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button><a href="#products" onClick={event=>{event.preventDefault();nav('/'+locale+'#products')}}>{locale==='en'?'View product series':'查看产品系列'}</a></div><div className="chips"><span>Indoor + outdoor</span><span>OEM/ODM ready</span><span>Project-based specs</span></div></div><HeroArt/></section><section id="products"><p className="eyebrow">{t.nav.products}</p><h2>{locale==='en'?'Product series':'产品系列'}</h2><div className="quick">{products.map(p=><button key={p.slug} onClick={()=>nav('/'+locale+'/products/'+p.slug)}><small>{p[locale].eyebrow}</small>{p[locale].title}</button>)}</div><div className="cards">{products.map(p=><article key={p.slug}><ProductVisual/><small>{p[locale].eyebrow}</small><h3>{p[locale].title}</h3><p>{p[locale].body}</p><button onClick={()=>nav('/'+locale+'/products/'+p.slug)}>{t.details} →</button></article>)}</div></section><section id="applications" className="split"><h2>{t.applicationsTitle}</h2><div>{t.apps.map(x=><p key={x}>✓ {x}</p>)}</div></section><section id="strengths" className="strength"><p className="eyebrow">{locale==='en'?'Strengths':'优势'}</p><h2>{t.strengthsTitle}</h2><div>{t.strengths.map(x=><p key={x}>{x}</p>)}</div></section><section id="about" className="about"><p className="eyebrow">{t.nav.about}</p><h2>{t.aboutTitle}</h2><p>{t.aboutBody}</p></section><section className="cta"><h2>{locale==='en'?'Send your cabinet or PDU requirements.':'发送您的机柜或 PDU 项目需求。'}</h2><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button></section></main>}
 function ProductVisual(){return <div className="visual"><span/><span/><span/></div>}
+
+function Testimonials({ locale }) {
+  const t = copy[locale];
+  return <section id="testimonials" className="testimonials">
+    <div className="testimonial-panel">
+      <div className="testimonial-top"><span>{locale === 'en' ? 'TESTIMONIALS' : '海外项目反馈'}</span><span>(06)</span></div>
+      <div className="testimonial-heading"><h2>{t.testimonialsTitle}</h2><p>{t.testimonialsBody}</p></div>
+      <div className="testimonial-grid">
+        {reviews[locale].map(item => <article key={item.name}>
+          <div className="review-head"><span>{item.name.slice(0, 1)}</span><div><b>{item.name}</b><small>{item.role}</small></div></div>
+          <p>{item.quote}</p>
+        </article>)}
+      </div>
+    </div>
+  </section>;
+}
+
+function Home({locale, nav}){const t=copy[locale];return <main><section className="hero reveal"><div><p className="eyebrow">{t.heroEyebrow}</p><h1>{t.heroTitle}</h1><p className="lead">{t.heroBody}</p><div className="actions"><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button><a href="#products" onClick={event=>{event.preventDefault();nav('/'+locale+'#products')}}>{locale==='en'?'View product series':'查看产品系列'}</a></div><div className="chips"><span>Indoor + outdoor</span><span>OEM/ODM ready</span><span>Project-based specs</span></div></div><HeroArt/></section><section id="products"><p className="eyebrow">{t.nav.products}</p><h2>{locale==='en'?'Product series':'产品系列'}</h2><div className="quick">{products.map(p=><button key={p.slug} onClick={()=>nav('/'+locale+'/products/'+p.slug)}><small>{p[locale].eyebrow}</small>{p[locale].title}</button>)}</div><div className="cards">{products.map(p=><article key={p.slug}><ProductVisual/><small>{p[locale].eyebrow}</small><h3>{p[locale].title}</h3><p>{p[locale].body}</p><button onClick={()=>nav('/'+locale+'/products/'+p.slug)}>{t.details} →</button></article>)}</div></section><section id="applications" className="split"><h2>{t.applicationsTitle}</h2><div>{t.apps.map(x=><p key={x}>✓ {x}</p>)}</div></section><section id="strengths" className="strength"><p className="eyebrow">{t.nav.strengths}</p><h2>{t.strengthsTitle}</h2><div>{t.strengths.map(x=><p key={x}>{x}</p>)}</div></section><Testimonials locale={locale}/><section id="about" className="about"><p className="eyebrow">{t.nav.about}</p><h2>{t.aboutTitle}</h2><p>{t.aboutBody}</p></section><section className="cta"><h2>{locale==='en'?'Send your cabinet or PDU requirements.':'发送您的机柜或 PDU 项目需求。'}</h2><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button></section></main>}
 function Product({locale, product, nav}){return <main><section className="detail"><div><p className="eyebrow">{product[locale].eyebrow}</p><h1>{product[locale].title}</h1><p className="lead">{product[locale].body}</p><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{locale==='en'?'Ask for specifications':'咨询规格'}</button></div><HeroArt/></section><section className="cards three">{product[locale].items.map(x=><article key={x}><h3>{x}</h3><p>{locale==='en'?'Project specifications, dimensions, finish, and accessories can be adjusted by request.':'规格、尺寸、表面处理和附件可根据项目需求调整。'}</p></article>)}</section></main>}
 function Contact({locale}){const t=copy[locale];return <main><section className="contact"><p className="eyebrow">{t.nav.inquiry}</p><h1>{t.contactTitle}</h1><p className="lead">{locale==='en'?'Email us your cabinet type, size, PDU layout, quantity, destination, and drawings if available.':'请提供机柜类型、尺寸、PDU 布局、数量、目的地，以及已有图纸或招标要求。'}</p><div className="contact-box"><a href="mailto:sales@synstro.xyz">sales@synstro.xyz</a><span>WhatsApp TODO</span></div></section></main>}
 
