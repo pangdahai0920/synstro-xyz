@@ -1,5 +1,3 @@
 / /en 302
-/en/products /en 302
-/zh/products /zh 302
 /en/* /index.html 200
 /zh/* /index.html 200
