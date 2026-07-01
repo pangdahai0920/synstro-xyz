@@ -79,23 +79,25 @@ const copy = {
   }
 };
 
+const pageSet = new Set(['products', 'applications', 'advantages', 'reviews', 'about']);
+
 function parseRoute() {
   const parts = location.pathname.split('/').filter(Boolean);
   const locale = parts[0] === 'zh' ? 'zh' : 'en';
-  const product = parts[1] === 'products' ? products.find(p => p.slug === parts[2]) : null;
+  const product = parts[1] === 'products' && parts[2] ? products.find(p => p.slug === parts[2]) : null;
   const contact = parts[1] === 'contact';
-  return { locale, product, contact };
-}
-
-function sectionFromHash() {
-  return location.hash.replace('#', '') || 'home';
+  const page = !product && pageSet.has(parts[1]) ? parts[1] : null;
+  return { locale, product, contact, page };
 }
 
 function activeNavIndex(route) {
   if (route.contact) return 6;
-  if (route.product) return 1;
-  const map = { home: 0, products: 1, applications: 2, strengths: 3, testimonials: 4, about: 5 };
-  return map[sectionFromHash()] ?? 0;
+  if (route.product || route.page === 'products') return 1;
+  if (route.page === 'applications') return 2;
+  if (route.page === 'advantages') return 3;
+  if (route.page === 'reviews') return 4;
+  if (route.page === 'about') return 5;
+  return 0;
 }
 
 function GooeyNav({ items, activeIndex, onSelect }) {
@@ -197,21 +199,20 @@ function App() {
     if (location.pathname === '/') history.replaceState({}, '', '/en');
     const syncRoute = () => { const next = parseRoute(); setRoute(next); setActiveIndex(activeNavIndex(next)); };
     addEventListener('popstate', syncRoute);
-    addEventListener('hashchange', syncRoute);
     document.documentElement.lang = route.locale === 'zh' ? 'zh-CN' : 'en';
     document.title = route.locale === 'zh' ? 'Synstro 网络机柜、PDU、户外防雨柜与电信箱柜' : 'Synstro Network Cabinets, PDUs, Outdoor Telecom Enclosures';
-    return () => { removeEventListener('popstate', syncRoute); removeEventListener('hashchange', syncRoute); };
+    return () => removeEventListener('popstate', syncRoute);
   }, [route.locale]);
 
   const t = copy[route.locale];
   const other = route.locale === 'en' ? 'zh' : 'en';
   const navItems = useMemo(() => [
     { label: t.nav.home, href: `/${route.locale}` },
-    { label: t.nav.products, href: `/${route.locale}#products`, children: productMenus[route.locale] },
-    { label: t.nav.applications, href: `/${route.locale}#applications` },
-    { label: t.nav.strengths, href: `/${route.locale}#strengths` },
-    { label: t.nav.testimonials, href: `/${route.locale}#testimonials` },
-    { label: t.nav.about, href: `/${route.locale}#about` },
+    { label: t.nav.products, href: `/${route.locale}/products`, children: productMenus[route.locale] },
+    { label: t.nav.applications, href: `/${route.locale}/applications` },
+    { label: t.nav.strengths, href: `/${route.locale}/advantages` },
+    { label: t.nav.testimonials, href: `/${route.locale}/reviews` },
+    { label: t.nav.about, href: `/${route.locale}/about` },
     { label: t.nav.inquiry, href: `/${route.locale}/contact` }
   ], [route.locale, t]);
 
@@ -220,21 +221,23 @@ function App() {
     const next = parseRoute();
     setRoute(next);
     setActiveIndex(activeNavIndex(next));
-    const hash = path.split('#')[1];
-    setTimeout(() => {
-      if (hash) document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      else scrollTo({ top: 0, behavior: 'smooth' });
-    }, 0);
+    setTimeout(() => scrollTo({ top: 0, behavior: 'smooth' }), 0);
   };
 
-  const languagePath = location.pathname.replace(/^\/(en|zh)/, '/' + other) + location.hash;
+  const languagePath = location.pathname.replace(/^\/(en|zh)/, '/' + other);
+  const page = route.product ? <Product locale={route.locale} product={route.product} nav={nav}/> : route.contact ? <Contact locale={route.locale}/> : route.page ? <Page locale={route.locale} page={route.page} nav={nav}/> : <Home locale={route.locale} nav={nav}/>;
 
-  return <div className="shell"><Backdrop/><header><button className="brand" onClick={() => nav('/'+route.locale)}><span>S</span><b>SYNSTRO</b></button><GooeyNav items={navItems} activeIndex={activeIndex} onSelect={nav}/><div className="header-actions"><button className="language" onClick={() => nav(languagePath)}>{t.switch}</button><button className="primary small" onClick={() => nav('/'+route.locale+'/contact')}>{t.nav.inquiry}</button></div></header>{route.product ? <Product locale={route.locale} product={route.product} nav={nav}/> : route.contact ? <Contact locale={route.locale}/> : <Home locale={route.locale} nav={nav}/>}<footer><b>SYNSTRO</b><span>sales@synstro.xyz</span></footer></div>;
+  return <div className="shell"><Backdrop/><header><button className="brand" onClick={() => nav('/'+route.locale)}><span>S</span><b>SYNSTRO</b></button><GooeyNav items={navItems} activeIndex={activeIndex} onSelect={nav}/><div className="header-actions"><button className="language" onClick={() => nav(languagePath)}>{t.switch}</button><button className="primary small" onClick={() => nav('/'+route.locale+'/contact')}>{t.nav.inquiry}</button></div></header>{page}<footer><b>SYNSTRO</b><span>sales@synstro.xyz</span></footer></div>;
 }
 
 function Backdrop(){return <div className="backdrop"><i/><i/><i/></div>}
 function HeroArt(){return <div className="hero-art"><div className="rack"><em/><em/><em/><em/><em/><em/><em/></div><div className="pdu"><span/><span/><span/><span/><b/></div><div className="outdoor"><span/><span/><b/></div><strong>Cabinet + PDU + Outdoor</strong></div>}
 function ProductVisual(){return <div className="visual"><span/><span/><span/></div>}
+
+function ProductsOverview({ locale, nav }) {
+  const t = copy[locale];
+  return <><section className="page-hero"><p className="eyebrow">{t.nav.products}</p><h1>{locale === 'en' ? 'Product series' : '产品系列'}</h1><p className="lead">{locale === 'en' ? 'Choose a product family to view cabinet, PDU, and outdoor enclosure options for your project.' : '选择对应产品系列，查看网络机柜、PDU 和户外防护箱柜的项目配置方向。'}</p></section><section className="cards page-cards">{products.map(p=><article key={p.slug}><ProductVisual/><small>{p[locale].eyebrow}</small><h3>{p[locale].title}</h3><p>{p[locale].body}</p><button onClick={()=>nav('/'+locale+'/products/'+p.slug)}>{t.details} →</button></article>)}</section></>;
+}
 
 function Testimonials({ locale }) {
   const t = copy[locale];
@@ -252,7 +255,16 @@ function Testimonials({ locale }) {
   </section>;
 }
 
-function Home({locale, nav}){const t=copy[locale];return <main><section className="hero reveal"><div><p className="eyebrow">{t.heroEyebrow}</p><h1>{t.heroTitle}</h1><p className="lead">{t.heroBody}</p><div className="actions"><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button><a href="#products" onClick={event=>{event.preventDefault();nav('/'+locale+'#products')}}>{locale==='en'?'View product series':'查看产品系列'}</a></div><div className="chips"><span>Indoor + outdoor</span><span>OEM/ODM ready</span><span>Project-based specs</span></div></div><HeroArt/></section><section id="products"><p className="eyebrow">{t.nav.products}</p><h2>{locale==='en'?'Product series':'产品系列'}</h2><div className="quick">{products.map(p=><button key={p.slug} onClick={()=>nav('/'+locale+'/products/'+p.slug)}><small>{p[locale].eyebrow}</small>{p[locale].title}</button>)}</div><div className="cards">{products.map(p=><article key={p.slug}><ProductVisual/><small>{p[locale].eyebrow}</small><h3>{p[locale].title}</h3><p>{p[locale].body}</p><button onClick={()=>nav('/'+locale+'/products/'+p.slug)}>{t.details} →</button></article>)}</div></section><section id="applications" className="split"><h2>{t.applicationsTitle}</h2><div>{t.apps.map(x=><p key={x}>✓ {x}</p>)}</div></section><section id="strengths" className="strength"><p className="eyebrow">{t.nav.strengths}</p><h2>{t.strengthsTitle}</h2><div>{t.strengths.map(x=><p key={x}>{x}</p>)}</div></section><Testimonials locale={locale}/><section id="about" className="about"><p className="eyebrow">{t.nav.about}</p><h2>{t.aboutTitle}</h2><p>{t.aboutBody}</p></section><section className="cta"><h2>{locale==='en'?'Send your cabinet or PDU requirements.':'发送您的机柜或 PDU 项目需求。'}</h2><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button></section></main>}
+function Page({ locale, page, nav }) {
+  const t = copy[locale];
+  if (page === 'products') return <main><ProductsOverview locale={locale} nav={nav}/></main>;
+  if (page === 'reviews') return <main><section className="page-hero"><p className="eyebrow">{t.nav.testimonials}</p><h1>{t.testimonialsTitle}</h1><p className="lead">{t.testimonialsBody}</p></section><Testimonials locale={locale}/></main>;
+  if (page === 'applications') return <main><section className="page-hero"><p className="eyebrow">{t.nav.applications}</p><h1>{t.applicationsTitle}</h1><p className="lead">{locale === 'en' ? 'Typical deployment environments for Synstro network cabinets, PDUs, and outdoor protection systems.' : 'Synstro 网络机柜、PDU 和户外防护系统适用的典型部署环境。'}</p></section><section className="cards page-cards">{t.apps.map(x=><article key={x}><h3>{x}</h3><p>{locale === 'en' ? 'We match cabinet structure, ventilation, power distribution, and accessories by project requirements.' : '可根据项目需求匹配机柜结构、通风方案、配电布局和附件。'}</p></article>)}</section></main>;
+  if (page === 'advantages') return <main><section className="page-hero"><p className="eyebrow">{t.nav.strengths}</p><h1>{t.strengthsTitle}</h1><p className="lead">{locale === 'en' ? 'Clear specification communication and flexible project matching for overseas procurement.' : '围绕海外项目采购，提供清晰规格沟通和灵活项目匹配。'}</p></section><section className="cards page-cards">{t.strengths.map(x=><article key={x}><h3>{x}</h3><p>{locale === 'en' ? 'Designed to make project inquiry, comparison, and specification confirmation faster.' : '帮助项目询盘、产品对比和规格确认更快推进。'}</p></article>)}</section></main>;
+  return <main><section className="page-hero"><p className="eyebrow">{t.nav.about}</p><h1>{t.aboutTitle}</h1><p className="lead">{t.aboutBody}</p><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button></section></main>;
+}
+
+function Home({locale, nav}){const t=copy[locale];return <main><section className="hero reveal"><div><p className="eyebrow">{t.heroEyebrow}</p><h1>{t.heroTitle}</h1><p className="lead">{t.heroBody}</p><div className="actions"><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button><a href={'/'+locale+'/products'} onClick={event=>{event.preventDefault();nav('/'+locale+'/products')}}>{locale==='en'?'View product series':'查看产品系列'}</a></div><div className="chips"><span>Indoor + outdoor</span><span>OEM/ODM ready</span><span>Project-based specs</span></div></div><HeroArt/></section><section id="products"><p className="eyebrow">{t.nav.products}</p><h2>{locale==='en'?'Product series':'产品系列'}</h2><div className="quick">{products.map(p=><button key={p.slug} onClick={()=>nav('/'+locale+'/products/'+p.slug)}><small>{p[locale].eyebrow}</small>{p[locale].title}</button>)}</div><div className="cards">{products.map(p=><article key={p.slug}><ProductVisual/><small>{p[locale].eyebrow}</small><h3>{p[locale].title}</h3><p>{p[locale].body}</p><button onClick={()=>nav('/'+locale+'/products/'+p.slug)}>{t.details} →</button></article>)}</div></section><section id="applications" className="split"><h2>{t.applicationsTitle}</h2><div>{t.apps.map(x=><p key={x}>✓ {x}</p>)}</div></section><section id="strengths" className="strength"><p className="eyebrow">{t.nav.strengths}</p><h2>{t.strengthsTitle}</h2><div>{t.strengths.map(x=><p key={x}>{x}</p>)}</div></section><Testimonials locale={locale}/><section id="about" className="about"><p className="eyebrow">{t.nav.about}</p><h2>{t.aboutTitle}</h2><p>{t.aboutBody}</p></section><section className="cta"><h2>{locale==='en'?'Send your cabinet or PDU requirements.':'发送您的机柜或 PDU 项目需求。'}</h2><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{t.cta}</button></section></main>}
 function Product({locale, product, nav}){return <main><section className="detail"><div><p className="eyebrow">{product[locale].eyebrow}</p><h1>{product[locale].title}</h1><p className="lead">{product[locale].body}</p><button className="primary" onClick={()=>nav('/'+locale+'/contact')}>{locale==='en'?'Ask for specifications':'咨询规格'}</button></div><HeroArt/></section><section className="cards three">{product[locale].items.map(x=><article key={x}><h3>{x}</h3><p>{locale==='en'?'Project specifications, dimensions, finish, and accessories can be adjusted by request.':'规格、尺寸、表面处理和附件可根据项目需求调整。'}</p></article>)}</section></main>}
 function Contact({locale}){const t=copy[locale];return <main><section className="contact"><p className="eyebrow">{t.nav.inquiry}</p><h1>{t.contactTitle}</h1><p className="lead">{locale==='en'?'Email us your cabinet type, size, PDU layout, quantity, destination, and drawings if available.':'请提供机柜类型、尺寸、PDU 布局、数量、目的地，以及已有图纸或招标要求。'}</p><div className="contact-box"><a href="mailto:sales@synstro.xyz">sales@synstro.xyz</a><span>WhatsApp TODO</span></div></section></main>}
 
