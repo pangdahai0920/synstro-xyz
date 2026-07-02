@@ -173,9 +173,9 @@ function RelatedSeries({ locale, series, nav }) {
   return <section className="related-series"><div className="section-head"><p className="eyebrow">{labels[locale].related}</p><h2>{labels[locale].related}</h2></div><div className="catalog-grid">{related.map((item) => <button key={item.slug} className="series-card" onClick={() => nav(`/${locale}/products/${item.parent}/${item.slug}`)}><span>{displayTitle(seriesTitle(item, locale))}</span><b>{item.models.length} {locale === 'en' ? 'models' : '个型号'}</b><small>/products/{item.parent}/{item.slug}</small></button>)}</div></section>;
 }
 
-function ModelTable({ models, locale, isPdu }) {
+function ModelTable({ models, locale, isPdu, series }) {
   const tableLabels = isPdu ? (locale === 'en' ? ['Socket Type', 'Pure copper wire', 'Rated current', 'Description'] : ['插座类型', '纯铜线规格', '额定电流', '配置描述']) : (locale === 'en' ? ['Model', 'Size W*D*H', 'Volume CBM', 'Weight', 'Accessories'] : ['型号', '尺寸 W*D*H', '体积 CBM', '重量', '配件']);
-  return <div className="model-table-wrap"><table className="model-table"><thead><tr>{tableLabels.map((label) => <th key={label}>{label}</th>)}</tr></thead><tbody>{models.map((model, index) => isPdu ? <tr key={index}><td>{cleanValue(model.description, locale)}</td><td>{cleanValue(model.wire, locale)}</td><td>{cleanValue(model.current, locale)}</td><td>{cleanValue(model.description, locale)}</td></tr> : <tr key={`${model.model}-${index}`}><td>{cleanValue(model.model, locale)}</td><td>{cleanValue(model.size, locale)}</td><td>{cleanValue(model.volume, locale)}</td><td>{cleanValue(model.weight, locale)}</td><td>{cleanValue(model.accessories, locale)}</td></tr>)}</tbody></table></div>;
+  return <div className="model-table-wrap"><table className="model-table"><thead><tr>{tableLabels.map((label) => <th key={label}>{label}</th>)}</tr></thead><tbody>{models.map((model, index) => isPdu ? <tr key={index}><td>{displayTitle(seriesTitle(series, locale))}</td><td>{cleanValue(model.wire, locale)}</td><td>{cleanValue(model.current, locale)}</td><td>{cleanValue(model.description, locale)}</td></tr> : <tr key={`${model.model}-${index}`}><td>{cleanValue(model.model, locale)}</td><td>{cleanValue(model.size, locale)}</td><td>{cleanValue(model.volume, locale)}</td><td>{cleanValue(model.weight, locale)}</td><td>{cleanValue(model.accessories, locale)}</td></tr>)}</tbody></table></div>;
 }
 
 export function IndustrialProductDetailPage({ locale, product, series, nav, productPath }) {
@@ -202,7 +202,7 @@ export function IndustrialProductDetailPage({ locale, product, series, nav, prod
       </aside>
     </section>
 
-    <section className="model-section"><div className="section-head"><p className="eyebrow">{labels[locale].modelTable}</p><h2>{series.models.length} {locale === 'en' ? 'models in this series' : '个型号参数'}</h2></div><ModelTable models={series.models} locale={locale} isPdu={isPdu} /></section>
+    <section className="model-section"><div className="section-head"><p className="eyebrow">{labels[locale].modelTable}</p><h2>{series.models.length} {locale === 'en' ? 'models in this series' : '个型号参数'}</h2></div><ModelTable models={series.models} locale={locale} isPdu={isPdu} series={series} /></section>
     <ProjectSupport locale={locale} />
     <Applications locale={locale} />
     <RelatedSeries locale={locale} series={series} nav={nav} />
